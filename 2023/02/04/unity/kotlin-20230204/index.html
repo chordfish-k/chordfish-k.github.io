@@ -16,20 +16,20 @@
   <meta name="author" content="超弦鱼">
   <meta name="keywords" content="超弦鱼">
   
-    <meta name="description" content="1.Lambda变量 1234567val sum &#x3D; &amp;#123;a: Int, b: Int -&gt;     a + b&amp;#125;fun main() &amp;#123;    println(sum(1, 3))&amp;#125; 2.Lambda表达式作为参数（匿名函数） 123456789101112131415161718192021fun transform(arr: Array&amp;l">
+    <meta name="description" content="一、List 在Java中，我们可以使用ArraryList，当然在Kotlin中也可以这么做： 1234val list1 &#x3D; ArraryList&lt;String&gt;()list1.add(&quot;Apple&quot;)list1.add(&quot;Banana&quot;)list1.add(&quot;Pear&quot;) Kotlin中提供了两种内置函数 list">
 <meta property="og:type" content="article">
-<meta property="og:title" content="【Kotlin】学习笔记（三）Lambda表达式">
-<meta property="og:url" content="https://chordfish-k.github.io/2023/02/03/kotlin-20230203/index.html">
+<meta property="og:title" content="【Kotlin】学习笔记（四）集合类">
+<meta property="og:url" content="https://chordfish-k.github.io/2023/02/04/unity/kotlin-20230204/index.html">
 <meta property="og:site_name" content="~超弦鱼🐟~">
-<meta property="og:description" content="1.Lambda变量 1234567val sum &#x3D; &amp;#123;a: Int, b: Int -&gt;     a + b&amp;#125;fun main() &amp;#123;    println(sum(1, 3))&amp;#125; 2.Lambda表达式作为参数（匿名函数） 123456789101112131415161718192021fun transform(arr: Array&amp;l">
+<meta property="og:description" content="一、List 在Java中，我们可以使用ArraryList，当然在Kotlin中也可以这么做： 1234val list1 &#x3D; ArraryList&lt;String&gt;()list1.add(&quot;Apple&quot;)list1.add(&quot;Banana&quot;)list1.add(&quot;Pear&quot;) Kotlin中提供了两种内置函数 list">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://chordfish-k.github.io/img/kotlin.jpg">
-<meta property="article:published_time" content="2023-02-03T01:09:11.000Z">
-<meta property="article:modified_time" content="2023-03-01T05:12:20.983Z">
+<meta property="article:published_time" content="2023-02-04T06:35:05.000Z">
+<meta property="article:modified_time" content="2023-03-01T05:12:45.896Z">
 <meta property="article:author" content="超弦鱼">
 <meta property="article:tag" content="Kotlin">
 <meta property="article:tag" content="笔记">
-<meta property="article:tag" content="Lambda">
+<meta property="article:tag" content="集合">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://chordfish-k.github.io/img/kotlin.jpg">
   
@@ -37,7 +37,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>【Kotlin】学习笔记（三）Lambda表达式 - ~超弦鱼🐟~</title>
+  <title>【Kotlin】学习笔记（四）集合类 - ~超弦鱼🐟~</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -203,7 +203,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="【Kotlin】学习笔记（三）Lambda表达式"></span>
+            <span id="subtitle" data-typed-text="【Kotlin】学习笔记（四）集合类"></span>
           
         </div>
 
@@ -214,8 +214,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-02-03 09:09" pubdate>
-          2023年2月3日 上午
+        <time datetime="2023-02-04 14:35" pubdate>
+          2023年2月4日 下午
         </time>
       </span>
     
@@ -226,7 +226,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          972 字
+          2.1k 字
         
       </span>
     
@@ -237,7 +237,7 @@
         
         
         
-          9 分钟
+          18 分钟
         
       </span>
     
@@ -309,7 +309,7 @@
     
       
       
-        <a href="/2023/02/01/kotlin-20230201/" title="【Kotlin】学习笔记（一）变量、函数与逻辑控制"
+        <a href="/2023/02/01/unity/kotlin-20230201/" title="【Kotlin】学习笔记（一）变量、函数与逻辑控制"
            class="list-group-item list-group-item-action
            ">
           <span class="category-post">【Kotlin】学习笔记（一）变量、函数与逻辑控制</span>
@@ -318,16 +318,16 @@
     
       
       
-        <a href="/2023/02/03/kotlin-20230203/" title="【Kotlin】学习笔记（三）Lambda表达式"
+        <a href="/2023/02/03/unity/kotlin-20230203/" title="【Kotlin】学习笔记（三）Lambda表达式"
            class="list-group-item list-group-item-action
-           active">
+           ">
           <span class="category-post">【Kotlin】学习笔记（三）Lambda表达式</span>
         </a>
       
     
       
       
-        <a href="/2023/02/02/kotlin-20230202/" title="【Kotlin】学习笔记（二）面向对象编程"
+        <a href="/2023/02/02/unity/kotlin-20230202/" title="【Kotlin】学习笔记（二）面向对象编程"
            class="list-group-item list-group-item-action
            ">
           <span class="category-post">【Kotlin】学习笔记（二）面向对象编程</span>
@@ -336,7 +336,7 @@
     
       
       
-        <a href="/2023/03/01/kotlin-20230301/" title="【Kotlin】学习笔记（五）泛型"
+        <a href="/2023/03/01/unity/kotlin-20230301/" title="【Kotlin】学习笔记（五）泛型"
            class="list-group-item list-group-item-action
            ">
           <span class="category-post">【Kotlin】学习笔记（五）泛型</span>
@@ -345,9 +345,9 @@
     
       
       
-        <a href="/2023/02/04/kotlin-20230204/" title="【Kotlin】学习笔记（四）集合类"
+        <a href="/2023/02/04/unity/kotlin-20230204/" title="【Kotlin】学习笔记（四）集合类"
            class="list-group-item list-group-item-action
-           ">
+           active">
           <span class="category-post">【Kotlin】学习笔记（四）集合类</span>
         </a>
       
@@ -371,17 +371,35 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">【Kotlin】学习笔记（三）Lambda表达式</h1>
+            <h1 style="display: none">【Kotlin】学习笔记（四）集合类</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="lambda变量">1.Lambda变量</h2>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-keyword">val</span> sum = &#123;a: <span class="hljs-built_in">Int</span>, b: <span class="hljs-built_in">Int</span> -&gt; <br>    a + b<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>    println(sum(<span class="hljs-number">1</span>, <span class="hljs-number">3</span>))<br>&#125;<br></code></pre></td></tr></table></figure>
-<h2 id="lambda表达式作为参数匿名函数">2.Lambda表达式作为参数（匿名函数）</h2>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">transform</span><span class="hljs-params">(arr: <span class="hljs-type">Array</span>&lt;<span class="hljs-type">Int</span>&gt;, action: (<span class="hljs-type">index</span>: <span class="hljs-type">Int</span>, <span class="hljs-type">ele</span>: <span class="hljs-type">Int</span>) -&gt; <span class="hljs-type">Int</span>)</span></span> &#123;<br>    <span class="hljs-comment">//遍历下标集</span><br>    <span class="hljs-keyword">for</span> (index <span class="hljs-keyword">in</span> arr.indices) &#123;<br>        <span class="hljs-keyword">val</span> newValue = action(index, arr[index])<br>        arr[index] = newValue<br>    &#125;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>    <span class="hljs-keyword">val</span> numbers = arrayOf(<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>)<br>    <span class="hljs-comment">//传入Lambda: 将数组的每个元素与其下标相乘</span><br>    <span class="hljs-comment">//效果与 numbers.mapIndexed&#123;index, value -&gt; index * value&#125; 相当</span><br>    transform(numbers, &#123;index, ele -&gt; <br>        index * ele<br>    &#125;)<br>    <br>    <span class="hljs-keyword">for</span> (n <span class="hljs-keyword">in</span> numbers) &#123;<br>        println(n)<br>    &#125;<br>    <br>&#125;<br></code></pre></td></tr></table></figure>
-<h2 id="进阶语法">3.进阶语法</h2>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">fun1</span><span class="hljs-params">(action: (<span class="hljs-type">a</span>: <span class="hljs-type">Int</span>) -&gt; <span class="hljs-type">Int</span>)</span></span>&#123;<br>    println(action(<span class="hljs-number">3</span>))<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>    <span class="hljs-comment">// 原表达式</span><br>    fun1(&#123;value:<span class="hljs-built_in">Int</span> -&gt; value * value&#125;)<br><br>    <span class="hljs-comment">// 1.由于可以自动推导类型，故省略类型声明</span><br>    fun1(&#123;value -&gt; value * value&#125;)<br><br>    <span class="hljs-comment">// 2.当lambda表达式是函数中最后一个参数时，可以将其放在函数后面</span><br>    fun1()&#123;value -&gt; value * value&#125;<br><br>    <span class="hljs-comment">// 3.当函数括号内没有参数时，可以省略括号</span><br>    fun1&#123;value -&gt; value * value&#125;<br><br>    <span class="hljs-comment">// 4.当lambda表达式参数只有一个时，可以省略，改用it指代</span><br>    fun1&#123;it * it&#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+                <h2 id="一list">一、List</h2>
+<p>在Java中，我们可以使用ArraryList，当然在Kotlin中也可以这么做：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-keyword">val</span> list1 = ArraryList&lt;String&gt;()<br>list1.add(<span class="hljs-string">&quot;Apple&quot;</span>)<br>list1.add(<span class="hljs-string">&quot;Banana&quot;</span>)<br>list1.add(<span class="hljs-string">&quot;Pear&quot;</span>)<br></code></pre></td></tr></table></figure>
+<p>Kotlin中提供了两种内置函数 <code>listOf()</code> 和 <code>mutableListOf()</code> 来简化初始化List的写法。</p>
+<p>前者创建的List不可修改，而后者可修改：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-keyword">val</span> list1 = listOf(<span class="hljs-string">&quot;Apple&quot;</span>, <span class="hljs-string">&quot;Banana&quot;</span>, <span class="hljs-string">&quot;Pear&quot;</span>)<br><span class="hljs-comment">//list1.add(&quot;Grape&quot;) //报错</span><br><br><span class="hljs-keyword">val</span> list2 = mutableListOf(<span class="hljs-string">&quot;Kim&quot;</span>, <span class="hljs-string">&quot;Sam&quot;</span>, <span class="hljs-string">&quot;Lisa&quot;</span>)<br>list2.add(<span class="hljs-string">&quot;Jack&quot;</span>) <span class="hljs-comment">// 正确</span><br></code></pre></td></tr></table></figure>
+<p>我们可以用<code>for-in</code>循环遍历这些集合</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-keyword">for</span> (fruit <span class="hljs-keyword">in</span> list1) &#123;<br>    println(fruit)<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="二set">二、Set</h2>
+<p>Set集合与List集合的用法相近，只是Set集合不能存放重复元素。</p>
+<p>Kotlin中同样提供了两种内置函数 <code>setOf()</code> 和 <code>mutableSetOf()</code>：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-keyword">val</span> <span class="hljs-keyword">set</span> = mutableSetOf(<span class="hljs-string">&quot;Apple&quot;</span>, <span class="hljs-string">&quot;Apple&quot;</span>, <span class="hljs-string">&quot;Banana&quot;</span>, <span class="hljs-string">&quot;Pear&quot;</span>)<br><span class="hljs-keyword">set</span>.add(<span class="hljs-string">&quot;Apple&quot;</span>) <span class="hljs-comment">//重复元素，不添加</span><br><span class="hljs-keyword">set</span>.add(<span class="hljs-string">&quot;Grape&quot;</span>) <span class="hljs-comment">//非重复，添加成功</span><br><span class="hljs-keyword">for</span> (fruit <span class="hljs-keyword">in</span> <span class="hljs-keyword">set</span>) &#123;<br>    println(fruit)<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="三map">三、Map</h2>
+<p>与其他语言一样，Map是一种以键值对形式的的数据结构，Java中的通常做法是创建一个HashMap实例，用<code>put()</code>和<code>get()</code>去操作这个Map：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-keyword">val</span> map1 = HashMap&lt;String, <span class="hljs-built_in">Int</span>&gt;()<br>map1.put(<span class="hljs-string">&quot;Apple&quot;</span>, <span class="hljs-number">1</span>)<br>map1.put(<span class="hljs-string">&quot;Banana&quot;</span>, <span class="hljs-number">2</span>)<br>map1.put(<span class="hljs-string">&quot;Pear&quot;</span>, <span class="hljs-number">3</span>)<br></code></pre></td></tr></table></figure>
+<p>在Kotlin中，我们也可以使用类似JavaScript的下标语法：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs kotlin">map1[<span class="hljs-string">&quot;Grape&quot;</span>] = <span class="hljs-number">4</span><br><span class="hljs-keyword">val</span> num = map1[<span class="hljs-string">&quot;Apple&quot;</span>]<br></code></pre></td></tr></table></figure>
+<p>当然，Kotlin中也提供了 <code>mapOf()</code> 和 <code>mutableMapOf()</code>来简化：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-keyword">val</span> map1 = mapOf(<br>    <span class="hljs-string">&quot;Apple&quot;</span>     to <span class="hljs-number">1</span><br>    <span class="hljs-string">&quot;Banana&quot;</span>    to <span class="hljs-number">2</span><br>    <span class="hljs-string">&quot;Pear&quot;</span>      to <span class="hljs-number">3</span><br>)<br></code></pre></td></tr></table></figure>
+<p>其中的 <strong>to</strong> 并不是关键字，而是一个 <strong>infix函数</strong>。</p>
+<p>同样，可以使用for循环去遍历Map</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-keyword">for</span> ((fruit, number) <span class="hljs-keyword">in</span> map1) &#123;<br>    println(<span class="hljs-string">&quot;fruit is &quot;</span> + fruit + <span class="hljs-string">&quot;, number is &quot;</span> + number)<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="四集合常用lambda操作">四、集合常用lambda操作</h2>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-keyword">val</span> li = listOf(<span class="hljs-number">1</span>,<span class="hljs-number">3</span>,<span class="hljs-number">5</span>,<span class="hljs-number">2</span>,<span class="hljs-number">4</span>)<br><br><span class="hljs-keyword">val</span> a = li.maxBy&#123;it&#125;        <span class="hljs-comment">//最大值，同理有minBy</span><br>println(<span class="hljs-string">&quot;maxBy: %a&quot;</span>)        <span class="hljs-comment">// 5</span><br><br><span class="hljs-keyword">val</span> b = li.filter&#123;it &gt; <span class="hljs-number">3</span>&#125;   <span class="hljs-comment">// 过滤器</span><br>println(<span class="hljs-string">&quot;filter: &quot;</span>)<br><span class="hljs-keyword">for</span> (n <span class="hljs-keyword">in</span> b) &#123;<br>    print(<span class="hljs-string">&quot;<span class="hljs-variable">$n</span> &quot;</span>)            <span class="hljs-comment">// 5 4</span><br>&#125;<br>println()<br><br><span class="hljs-keyword">val</span> c = li.sortedBy&#123;it&#125;     <span class="hljs-comment">// 升序排序，加-号为降序</span><br>println(<span class="hljs-string">&quot;sortBy: &quot;</span>)<br><span class="hljs-keyword">for</span> (n <span class="hljs-keyword">in</span> c) &#123;<br>    print(<span class="hljs-string">&quot;<span class="hljs-variable">$n</span> &quot;</span>)            <span class="hljs-comment">// 1 2 3 4 5</span><br>&#125;<br>println()<br><br><span class="hljs-keyword">val</span> d = li.map&#123;it * <span class="hljs-number">2</span>&#125;      <span class="hljs-comment">//将集合内的值改为另一个值</span><br>println(<span class="hljs-string">&quot;map: &quot;</span>)<br><span class="hljs-keyword">for</span> (n <span class="hljs-keyword">in</span> d) &#123;<br>    print(<span class="hljs-string">&quot;<span class="hljs-variable">$n</span> &quot;</span>)            <span class="hljs-comment">// 2 6 10 4 8</span><br>&#125;<br>println()<br><br><span class="hljs-keyword">val</span> e = li.mapIndexed&#123;      <span class="hljs-comment">//同上，但lambda参数带下标</span><br>    index, value -&gt; index * value<br>&#125;      <br>println(<span class="hljs-string">&quot;map: &quot;</span>)<br><span class="hljs-keyword">for</span> (n <span class="hljs-keyword">in</span> e) &#123;<br>    print(<span class="hljs-string">&quot;<span class="hljs-variable">$n</span> &quot;</span>)            <span class="hljs-comment">// 0 3 10 6 16 </span><br>&#125;<br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -419,7 +437,7 @@
       
         <a href="/tags/%E7%AC%94%E8%AE%B0/">#笔记</a>
       
-        <a href="/tags/Lambda/">#Lambda</a>
+        <a href="/tags/%E9%9B%86%E5%90%88/">#集合</a>
       
     </div>
   
@@ -431,8 +449,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>【Kotlin】学习笔记（三）Lambda表达式</div>
-      <div>https://chordfish-k.github.io/2023/02/03/kotlin-20230203/</div>
+      <div>【Kotlin】学习笔记（四）集合类</div>
+      <div>https://chordfish-k.github.io/2023/02/04/unity/kotlin-20230204/</div>
     </div>
     <div class="license-meta">
       
@@ -444,7 +462,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年2月3日</div>
+          <div>2023年2月4日</div>
         </div>
       
       
@@ -476,9 +494,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/02/04/kotlin-20230204/" title="【Kotlin】学习笔记（四）集合类">
+                      <a href="/2023/02/23/database-20230223/" title="【数据库】课堂笔记（一）数据库系统概论">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">【Kotlin】学习笔记（四）集合类</span>
+                        <span class="hidden-mobile">【数据库】课堂笔记（一）数据库系统概论</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -486,8 +504,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/02/02/kotlin-20230202/" title="【Kotlin】学习笔记（二）面向对象编程">
-                        <span class="hidden-mobile">【Kotlin】学习笔记（二）面向对象编程</span>
+                      <a href="/2023/02/03/unity/kotlin-20230203/" title="【Kotlin】学习笔记（三）Lambda表达式">
+                        <span class="hidden-mobile">【Kotlin】学习笔记（三）Lambda表达式</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

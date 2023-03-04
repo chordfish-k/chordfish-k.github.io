@@ -1,0 +1,986 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fish.jpg">
+  <link rel="icon" href="/img/fish.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="超弦鱼">
+  <meta name="keywords" content="超弦鱼">
+  
+    <meta name="description" content="一、类与对象 下面的将示范如何创建一个Kotlin类： 12345678class Person &amp;#123;      &#x2F;&#x2F;类名：Person    var name &#x3D; &quot;&quot;   &#x2F;&#x2F;类成员变量    var age &#x3D; 0    fun show() &amp;#123;    &#x2F;&#x2F;类成员函数        println(name + &quot;，&quot; + age">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【Kotlin】学习笔记（二）面向对象编程">
+<meta property="og:url" content="https://chordfish-k.github.io/2023/02/02/kotlin-20230202/index.html">
+<meta property="og:site_name" content="~超弦鱼🐟~">
+<meta property="og:description" content="一、类与对象 下面的将示范如何创建一个Kotlin类： 12345678class Person &amp;#123;      &#x2F;&#x2F;类名：Person    var name &#x3D; &quot;&quot;   &#x2F;&#x2F;类成员变量    var age &#x3D; 0    fun show() &amp;#123;    &#x2F;&#x2F;类成员函数        println(name + &quot;，&quot; + age">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://chordfish-k.github.io/img/kotlin.jpg">
+<meta property="article:published_time" content="2023-02-02T04:38:55.000Z">
+<meta property="article:modified_time" content="2023-02-03T06:34:39.874Z">
+<meta property="article:author" content="超弦鱼">
+<meta property="article:tag" content="Kotlin">
+<meta property="article:tag" content="笔记">
+<meta property="article:tag" content="面向对象">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://chordfish-k.github.io/img/kotlin.jpg">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>【Kotlin】学习笔记（二）面向对象编程 - ~超弦鱼🐟~</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"chordfish-k.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["-smil",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>~超弦鱼🐟~</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/kotlin.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="【Kotlin】学习笔记（二）面向对象编程"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-02-02 12:38" pubdate>
+          2023年2月2日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3.7k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          31 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar category-bar" style="margin-right: -1rem">
+    
+
+
+
+
+
+<div class="category-list">
+  
+  
+    
+    
+    
+    <div class="category row nomargin-x">
+      <a class="category-item 
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="Kotlin"
+        id="heading-539a3a5859d24fb7b129e74d61f09ffa" role="tab" data-toggle="collapse" href="#collapse-539a3a5859d24fb7b129e74d61f09ffa"
+        aria-expanded="true"
+      >
+        Kotlin
+        <span class="list-group-count">(5)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse show" id="collapse-539a3a5859d24fb7b129e74d61f09ffa"
+           role="tabpanel" aria-labelledby="heading-539a3a5859d24fb7b129e74d61f09ffa">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/2023/02/01/kotlin-20230201/" title="【Kotlin】学习笔记（一）变量、函数与逻辑控制"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">【Kotlin】学习笔记（一）变量、函数与逻辑控制</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/02/03/kotlin-20230203/" title="【Kotlin】学习笔记（三）Lambda表达式"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">【Kotlin】学习笔记（三）Lambda表达式</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/02/02/kotlin-20230202/" title="【Kotlin】学习笔记（二）面向对象编程"
+           class="list-group-item list-group-item-action
+           active">
+          <span class="category-post">【Kotlin】学习笔记（二）面向对象编程</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/03/01/kotlin-20230301/" title="【Kotlin】学习笔记（五）泛型"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">【Kotlin】学习笔记（五）泛型</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/02/04/kotlin-20230204/" title="【Kotlin】学习笔记（四）集合类"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">【Kotlin】学习笔记（四）集合类</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+</div>
+
+
+  </aside>
+
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">【Kotlin】学习笔记（二）面向对象编程</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="一类与对象">一、类与对象</h2>
+<p>下面的将示范如何创建一个Kotlin类：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Person</span> &#123;      <span class="hljs-comment">//类名：Person</span><br>    <span class="hljs-keyword">var</span> name = <span class="hljs-string">&quot;&quot;</span>   <span class="hljs-comment">//类成员变量</span><br>    <span class="hljs-keyword">var</span> age = <span class="hljs-number">0</span><br><br>    <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">show</span><span class="hljs-params">()</span></span> &#123;    <span class="hljs-comment">//类成员函数</span><br>        println(name + <span class="hljs-string">&quot;，&quot;</span> + age + <span class="hljs-string">&quot;岁&quot;</span>)<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>然后将这个类进行<strong>实例化</strong>，获得一个<strong>对象</strong></p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>    <span class="hljs-keyword">val</span> p = Person() <span class="hljs-comment">//跟Java相比，去掉了new关键字</span><br>    p.name = <span class="hljs-string">&quot;田所浩二&quot;</span><br>    p.age = <span class="hljs-number">24</span><br>    p.show()<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="二类的继承与构造函数">二、类的继承与构造函数</h2>
+<p>首先，在Kotlin中，所有非抽象类默认都是不可继承的，就像Java中的<code>final</code>声明的类，要使得类能悲继承，需要<code>open</code>关键字。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-keyword">open</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Person</span> &#123;      <span class="hljs-comment">//类名：Person</span><br>    ...<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>然后我们让<code>Student</code>类继承<code>Person</code>类，使用一个冒号，注意被继承类名后面的括号：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Student</span> : <span class="hljs-type">Person</span>() &#123;<br>    <span class="hljs-keyword">var</span> id = <span class="hljs-string">&quot;&quot;</span><br>    <span class="hljs-keyword">var</span> grade = <span class="hljs-number">0</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<p>另外是关于构造函数的部分。Kotlin将构造函数分成了两种：<strong>主构造函数</strong>和<strong>次构造函数</strong>。</p>
+<h3 id="主构造函数">1.主构造函数</h3>
+<p><strong>主构造函数</strong>是每个类默认都会有的一个不带参数的构造函数，我们也可以给它指定参数。主构造函数没有函数体，直接定义在类名后面：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Student</span>(<span class="hljs-keyword">val</span> id: String, <span class="hljs-keyword">val</span> grade: <span class="hljs-built_in">Int</span>): Person() &#123;<br>    <span class="hljs-comment">//在主构造函数中声明为val或var的参数会自动成为该类的成员</span><br>&#125;<br><br><span class="hljs-comment">//实例化的时候：传入构造函数的所有参数：</span><br><span class="hljs-keyword">val</span> student = Student(<span class="hljs-string">&quot;1145141919810&quot;</span>, <span class="hljs-number">5</span>)<br></code></pre></td></tr></table></figure>
+<p>主构造函数没有函数体，如果想在其中编写逻辑，可以使用init结构体：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Student</span>(<span class="hljs-keyword">val</span> id: String, <span class="hljs-keyword">val</span> grade: <span class="hljs-built_in">Int</span>): Person() &#123;<br>    <span class="hljs-keyword">init</span> &#123;<br>        println(<span class="hljs-string">&quot;id is &quot;</span> + id)<br>        println(<span class="hljs-string">&quot;grade is &quot;</span> + grade)<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>根据继承的规定，<strong>子类的构造函数必须调用父类的构造函数</strong>，我们就需要在括号中填入父类构造函数的参数：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-comment">//将Person类的主构造函数改为：</span><br><span class="hljs-keyword">open</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Person</span>(<span class="hljs-keyword">val</span> name: String, <span class="hljs-keyword">val</span> age: <span class="hljs-built_in">Int</span>) &#123;<br>    ...<br>&#125;<br><br><span class="hljs-comment">//将Student类的继承改为：</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Student</span>(<span class="hljs-keyword">val</span> id: String, <span class="hljs-keyword">val</span> grade: <span class="hljs-built_in">Int</span>, name: String, age: <span class="hljs-built_in">Int</span>): <br>    Person(name, age) &#123; <span class="hljs-comment">//这里的name, age仅作为参数，不生成成员字段，防止父类同名成员的冲突</span><br>    <span class="hljs-keyword">init</span> &#123;<br>        println(<span class="hljs-string">&quot;id is &quot;</span> + id)<br>        println(<span class="hljs-string">&quot;grade is &quot;</span> + grade)<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="次构造函数">2.次构造函数</h3>
+<p>一个类能有多个次构造函数，如下：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Student</span>(<span class="hljs-keyword">val</span> id: String, <span class="hljs-keyword">val</span> grade: <span class="hljs-built_in">Int</span>, name: String, age: <span class="hljs-built_in">Int</span>): <br>    Person(name, age) <br>&#123; <br>    <br>    <span class="hljs-keyword">constructor</span>(name: String, age: <span class="hljs-built_in">Int</span>): <span class="hljs-keyword">this</span>(<span class="hljs-string">&quot;&quot;</span>, <span class="hljs-number">0</span>, name, age) &#123;<br><br>    &#125;<br><br>    <span class="hljs-keyword">constructor</span>(): <span class="hljs-keyword">this</span>(<span class="hljs-string">&quot;&quot;</span>, <span class="hljs-number">0</span>) &#123;<br><br>    &#125;<br>&#125;<br><br><span class="hljs-keyword">val</span> st1 = Student()<br><span class="hljs-keyword">val</span> st2 = Student(<span class="hljs-string">&quot;我修院卓&quot;</span>, <span class="hljs-number">23</span>)<br><span class="hljs-keyword">val</span> st3 = Student(<span class="hljs-string">&quot;1145141919810&quot;</span>, <span class="hljs-number">5</span>, <span class="hljs-string">&quot;田所浩二&quot;</span>, <span class="hljs-number">24</span>)<br></code></pre></td></tr></table></figure>
+<p>如果类中<strong>没有主构造函数，只有次构造函数</strong>该怎么继承？代码如下：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Student</span> : <span class="hljs-type">Person</span> &#123; <span class="hljs-comment">//没有主构造，故不用写括号</span><br>    <span class="hljs-comment">//以super关键字直接调用父类构造函数</span><br>    <span class="hljs-keyword">constructor</span>(name: String, age: <span class="hljs-built_in">Int</span>) : <span class="hljs-keyword">super</span>(name, age) &#123;&#125; <br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="三接口">三、接口</h2>
+<p>不同于C++的多继承，Java和Kotlin都是单继承结构的语言，最多只允许继承一个父类，但可以实现任意个<strong>接口</strong> 接口中定义的函数可以不实现，也可以定义默认的实现。Kotlin只会强制要求实现没有默认实现的函数。 接口定义方法如下：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-keyword">interface</span> <span class="hljs-title class_">Study</span> &#123;<br>    <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">readBooks</span><span class="hljs-params">()</span></span><br>    <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">doHomework</span><span class="hljs-params">()</span></span> &#123;<br>        println(<span class="hljs-string">&quot;doing homework&quot;</span>) <span class="hljs-comment">//默认的实现</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>让<code>Student</code>类实现这个接口, 和继承的写法一样，然后再使用<code>override</code>关键字重载接口定义的函数:</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Student</span>(name: String, age: <span class="hljs-built_in">Int</span>) : Person(name, age), Study &#123; <br>    <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">readBooks</span><span class="hljs-params">()</span></span> &#123;<br>        println(name + <span class="hljs-string">&quot; is reading.&quot;</span>)<br>    &#125;<br>    <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">doHomework</span><span class="hljs-params">()</span></span> &#123;<br>        println(name + <span class="hljs-string">&quot; is doing homework&quot;</span>)<br>    &#125;<br>&#125;<br><br><span class="hljs-comment">//使用这个类:</span><br><span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>    <span class="hljs-keyword">val</span> stu = Student(<span class="hljs-string">&quot;田所浩二&quot;</span>, <span class="hljs-number">24</span>)<br>    doStudy(stu)<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">doStudy</span><span class="hljs-params">(stu: <span class="hljs-type">Study</span>)</span></span> &#123; <br>    <span class="hljs-comment">//只有继承了Study接口的类的对象才能使用该函数</span><br>    stu.readBooks()<br>    stu.doHomework()<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="四可见性修饰符">四、可见性修饰符</h2>
+<p>Java中有四种修饰符：<code>public</code>、<code>private</code>、<code>protected</code>、<code>default</code>，默认是<code>default</code>。</p>
+<p>Kotlin也有四种：<code>public</code>、<code>private</code>、<code>protected</code>、<code>internal</code>， 默认是<code>public</code>。</p>
+<table>
+<thead>
+<tr class="header">
+<th>修饰符</th>
+<th>Java</th>
+<th>Kotlin</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>public</td>
+<td>所有类可见</td>
+<td>所有类可见(默认)</td>
+</tr>
+<tr class="even">
+<td>private</td>
+<td>当前类可见</td>
+<td>当前类可见</td>
+</tr>
+<tr class="odd">
+<td>protected</td>
+<td>当前类、子类、同一煲路径下的类可见</td>
+<td>当前类，子类可见</td>
+</tr>
+<tr class="even">
+<td>default</td>
+<td>同一包路径下的类可见(默认)</td>
+<td>无</td>
+</tr>
+<tr class="odd">
+<td>internal</td>
+<td>无</td>
+<td>同一模块中的类可见</td>
+</tr>
+</tbody>
+</table>
+<h2 id="五数据类">五、数据类</h2>
+<p>在一个规范的系统架构中，<strong>数据类</strong>用于将服务器端或数据库中的数据映射到内存中，为编程逻辑提供数据模型的支持。</p>
+<p>在Java中数据类通常需要重写<code>equals()</code>、<code>hashCode()</code>、<code>toString()</code>这几个方法，而Kotlin则只需要一个<code>data</code>关键字，这些方法便会自动生成：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-keyword">data</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Cellphone</span>(<span class="hljs-keyword">val</span> brand: String, <span class="hljs-keyword">val</span> price: <span class="hljs-built_in">Double</span>)<br></code></pre></td></tr></table></figure>
+<p>当一个类内部没有任何代码，便可以将大括号省略。 下面测试一下这个数据类：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>    <span class="hljs-keyword">val</span> cellphone1 = Cellphone(<span class="hljs-string">&quot;Samsung&quot;</span>, <span class="hljs-number">1299.99</span>)<br>    <span class="hljs-keyword">val</span> cellphone2 = Cellphone(<span class="hljs-string">&quot;Samsung&quot;</span>, <span class="hljs-number">1299.99</span>)<br>    println(cellphone1)<br>    println(<span class="hljs-string">&quot;cellphone1 == cellphone2 ? &quot;</span> + (cellphone1 == cellphone2))<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>运行结果如下：</p>
+<pre><code class="hljs">Cellphone(brand=Samsung, price=1299.99)
+cellphone1 == cellphone2 ? true</code></pre>
+<h2 id="六单例类">六、单例类</h2>
+<p>使用单例可以避免创建重复的对象，保证一个类最多拥有一个实例。</p>
+<p>在<strong>Java</strong>中创建单例类需要以下几个步骤：</p>
+<ol type="1">
+<li>将类的<strong>构造函数私有化</strong></li>
+<li>向外部提供一个<code>getInstance()</code>的<strong>静态方法</strong>用于获取该类实例</li>
+<li>在<code>getInstance()</code>中，判断如果当前缓存的实例为<code>null</code>，就创建一个新的实例并将其缓存，否则直接返回缓存的实例即可。</li>
+</ol>
+<p>在<strong>Kotlin</strong>中，只需要将<code>class</code>关键字改成<code>object</code>关键字即可声明单例类：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-keyword">object</span> Singleton &#123;<br>    <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">test</span><span class="hljs-params">()</span></span> &#123;<br>        println(<span class="hljs-string">&quot;test is called&quot;</span>)<br>    &#125;<br>&#125;<br><br><span class="hljs-comment">//调用方式</span><br>Singleton.test()<br></code></pre></td></tr></table></figure>
+<p>看上去就像是调用了静态方法，其实是Kotlin在背后自动创建了一个类的实例，并且保证全局只有一个该类的实例。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Kotlin/" class="category-chain-item">Kotlin</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Kotlin/">#Kotlin</a>
+      
+        <a href="/tags/%E7%AC%94%E8%AE%B0/">#笔记</a>
+      
+        <a href="/tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/">#面向对象</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>【Kotlin】学习笔记（二）面向对象编程</div>
+      <div>https://chordfish-k.github.io/2023/02/02/kotlin-20230202/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>超弦鱼</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年2月2日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/02/03/kotlin-20230203/" title="【Kotlin】学习笔记（三）Lambda表达式">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">【Kotlin】学习笔记（三）Lambda表达式</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/02/01/kotlin-20230201/" title="【Kotlin】学习笔记（一）变量、函数与逻辑控制">
+                        <span class="hidden-mobile">【Kotlin】学习笔记（一）变量、函数与逻辑控制</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"xpIDGe0KryVmvXevjsKncS2c-gzGzoHsz","appKey":"zuJyO2kHgnrWTWhy7EMfTacX","path":"window.location.pathname","placeholder":"评论区使用详情见 “关于” 页","avatar":"retro","meta":["nick","mail","link"],"requiredFields":["nick"],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+  <script>
+  Fluid.utils.createScript('https://lib.baomitu.com/mermaid/8.14.0/mermaid.min.js', function() {
+    mermaid.initialize({"theme":"default"});
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('mermaid' in window) {
+        mermaid.init();
+      }
+    });
+  });
+</script>
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+    <!-- 备案信息 ICP for China -->
+    <div class="beian">
+  <span>
+    <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+      粤ICP备2022072107号
+    </a>
+  </span>
+  
+    
+      <span>
+        <a
+          href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44120202000585"
+          rel="nofollow noopener"
+          class="beian-police"
+          target="_blank"
+        >
+          
+            <span style="visibility: hidden; width: 0">|</span>
+            <img src="/img/police_beian.png" srcset="/img/loading.gif" lazyload alt="police-icon"/>
+          
+          <span>粤公网安备44120202000585号</span>
+        </a>
+      </span>
+    
+  
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

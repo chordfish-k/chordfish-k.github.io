@@ -1,0 +1,957 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fish.jpg">
+  <link rel="icon" href="/img/fish.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="超弦鱼">
+  <meta name="keywords" content="超弦鱼">
+  
+    <meta name="description" content="一、关系模型  关系数据库系统：RDBMS，支持关系数据模型的数据库系统，当今的主流数据库管理系统。 关系模型的构成：由关系数据结构、关系操作集合和关系完整性约束三部分组成。  1. 关系数据结构 1. 关系  关系模型的数据结构简单，即二维表，亦称为关系 关系数据库：表的集合，即关系的集合。 表：一个实体集，一行就是一个实体，它由共同表示一个实体的相关联的若干属性的值所构成。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【数据库】课堂笔记（一）数据库系统概论">
+<meta property="og:url" content="https://chordfish-k.github.io/2023/03/04/database-20230304/index.html">
+<meta property="og:site_name" content="~超弦鱼🐟~">
+<meta property="og:description" content="一、关系模型  关系数据库系统：RDBMS，支持关系数据模型的数据库系统，当今的主流数据库管理系统。 关系模型的构成：由关系数据结构、关系操作集合和关系完整性约束三部分组成。  1. 关系数据结构 1. 关系  关系模型的数据结构简单，即二维表，亦称为关系 关系数据库：表的集合，即关系的集合。 表：一个实体集，一行就是一个实体，它由共同表示一个实体的相关联的若干属性的值所构成。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-03-04T10:08:59.000Z">
+<meta property="article:modified_time" content="2023-03-04T12:37:38.551Z">
+<meta property="article:author" content="超弦鱼">
+<meta property="article:tag" content="数据库，笔记">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>【数据库】课堂笔记（一）数据库系统概论 - ~超弦鱼🐟~</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"chordfish-k.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["-smil",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>~超弦鱼🐟~</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/liyue.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="【数据库】课堂笔记（一）数据库系统概论"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-03-04 18:08" pubdate>
+          2023年3月4日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          4k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          34 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">【数据库】课堂笔记（一）数据库系统概论</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="一关系模型">一、关系模型</h2>
+<ul>
+<li>关系数据库系统：<strong>RDBMS</strong>，支持关系数据模型的数据库系统，当今的主流数据库管理系统。</li>
+<li>关系模型的构成：由<strong>关系数据结构</strong>、<strong>关系操作集合</strong>和<strong>关系完整性约束</strong>三部分组成。</li>
+</ul>
+<h3 id="关系数据结构">1. 关系数据结构</h3>
+<h4 id="关系">1. 关系</h4>
+<ul>
+<li>关系模型的数据结构简单，即二维表，亦称为关系</li>
+<li>关系数据库：表的集合，即关系的集合。</li>
+<li>表：一个实体集，一行就是一个实体，它由共同表示一个实体的相关联的若干属性的值所构成。</li>
+</ul>
+<h4 id="关系模式">2. 关系模式</h4>
+<p>关系模式：描述关系，形式化表示：<code>r(U, D, DOM, F)</code> 。</p>
+<ul>
+<li>r：关系名；</li>
+<li>U：组成关系的属性名的集合；</li>
+<li>D：属性集U中所有属性所来自的域的集合；</li>
+<li>DOM：属性向域的映像集合；</li>
+<li>F：属性间数据依赖关系集合(元组各属性取值之间的关联性)。</li>
+</ul>
+<h4 id="关系与关系模式联系区别">3. 关系与关系模式联系区别</h4>
+<ul>
+<li>对于一个二维表，有表头部分和表体部分。
+<ul>
+<li><code>表头部分</code>：定义表的结构，即定义表由哪些列构成(假设由n列构成)，每个列的名字和取值范围等；</li>
+<li><code>表体部分</code>：所有数据行(元组)的集合，每个数据行都是由表头部分规定的n列有关联的取值的集合构成。</li>
+</ul></li>
+<li><strong>关系：</strong> 对应<code>表体部分</code>，每个数据行对应关系的一个元组，即关系是元组的集合。关系是 <strong>值</strong> 的概念。</li>
+<li><strong>关系模式：</strong> 对应<code>表头部分</code>，定义元组集合的结构，即定义一个元组由哪些属性构成，每个属性的名字和取值域等。 关系模式是 <strong>型</strong> 的概念。</li>
+</ul>
+<h4 id="码">4. 码</h4>
+<p><strong>超码：</strong> 关系r中的一个或多个属性的集合A，若A可以<code>唯一地标识</code>关系r中的一个元组，则称属性集A为关系r的一个超码 (superkey) 。</p>
+<p><strong>候选码：</strong> 关系r的一个或多个属性的集合A，若A是关系r的超码，且A的任意真子集都不能成为关系r的超码，则称属性集A为候选码 (candidate key) 。</p>
+<p><strong>主码：</strong> <u>若一个关系有多个候选码</u>，则可以选定其中的一个候选码作为该关系的主码 。</p>
+<p><strong>外码：</strong> 设F是关系r的一个属性(或属性集)，Ks是关系s的主码。如果F与Ks相对应(即关系r中属性F的取值范围对应于关系s中主码Ks的取值范围的子集)，则称F是关系r参照关系s的外码(foreign key)，简称F是关系r的外码。</p>
+<h3 id="关系完整性约束">2. 关系完整性约束</h3>
+<h4 id="实体完整性">1. 实体完整性</h4>
+<div class="note note-secondary">
+            <p>若属性集A是关系r的主码，则A<code>不能取空值null</code>。</p>
+          </div>
+<h4 id="参照完整性">2. 参照完整性</h4>
+<div class="note note-secondary">
+            <p>若属性(或属性集)F是关系r的外码，它与关系s的主码Ks相对应，则对于关系r中的每一个元组在属性F上的取值==要么为空值null，要么等于关系s中某个元组的主码值。</p>
+          </div>
+<h4 id="用户自定义完整性">3. 用户自定义完整性</h4>
+<div class="note note-secondary">
+            <p>针对<code>某一具体应用要求来定义的约束条件</code>，它反映某一具体应用所涉及的数据必须满足的语义要求。例如，</p><ul><li>限制关系中某些属性的取值符合业务语义要求。</li><li>限制关系中某些属性的取值之间满足一定的逻辑关系。</li><li>限制关系中某属性集上的取值必须唯一。</li></ul>
+          </div>
+<h3 id="关系操作集合">3. 关系操作集合</h3>
+<ul>
+<li>关系操作的特点是<strong>集合操作方式</strong>，即操作的对象和结果都是集合。</li>
+<li>操作方式也称为<strong>一次一个集合</strong>。</li>
+<li>关系模型中的关系操作有<strong>查询操作</strong>和<strong>更新操作(插入、删除和修改)</strong>两大类 。
+<ul>
+<li><strong>查询操作</strong>是关系操作中最主要的部分。查询操作又可以分为<code>选择</code>(select)、<code>投影</code>(project)、连接(join)、<code>除</code>(divide)、<code>并</code>(union)、<code>交</code>(intersection)、<code>差</code>(except)、<code>笛卡尔积</code>等。</li>
+</ul></li>
+<li>关系操作可用两种方式来表示 ——代数方式和逻辑方式。
+<ul>
+<li><p><strong>关系代数：</strong> 用<code>代数方式</code>表达的关系查询语言。</p></li>
+<li><p><strong>关系演算：</strong> 用<code>逻辑方式</code>表达的关系查询语言。关系演算又可按谓词变元的基本对象是元组变量还是域变量分为元组关系演算和域关系演算。</p></li>
+<li><p>对于关系代数、元组关系演算和域关系演算均是抽象的查询语言，在表达能力上是完全等价的。</p></li>
+</ul></li>
+</ul>
+<h2 id="二-关系代数">二、 关系代数</h2>
+<p>关系代数通过关系代数运算构成的表达式来表达查询。 基本的关系代数运算：<code>选择</code>、<code>投影</code>、<code>集合并</code>、<code>集合差</code>、<code>笛卡尔积</code>和<code>更名</code>等。 运算三要素：运算对象、运算符和运算结果。 关系代数运算是以一个或两个关系作为输入(运算对象)产生一个新的关系作为结果（运算结果 ）。</p>
+<h3 id="传统的集合运算">1. 传统的集合运算</h3>
+<h4 id="并">1. 并</h4>
+<ul>
+<li><p>关系r与关系s的并记作 
+$$
+{\color{Green} r} {\color{Red} \cup}  {\color{Green} s}  =
+\left \{
+{\color{Green} t} \mid
+{\color{Green} t} \in {\color{Green} r}
+\vee
+{\color{Green} t} \in {\color{Green} s}  
+\right \}
+$$
+</p></li>
+<li><p>结果关系：n目关系，由属于r或属于s的所有元组组成。</p></li>
+</ul>
+<h4 id="差">2. 差</h4>
+<ul>
+<li><p>关系r与关系s的差记作 ： 
+$$
+{\color{Green} r} {\color{Red} -}  {\color{Green} s}  =
+\left \{
+{\color{Green} t} \mid
+{\color{Green} t} \in {\color{Green} r}
+\wedge
+{\color{Green} t} \notin {\color{Green} s}  
+\right \}
+$$
+</p></li>
+<li><p>结果关系：n目关系，由属于r而不属于s的所有元组组成。</p></li>
+</ul>
+<h4 id="交">3. 交</h4>
+<ul>
+<li><p>关系r与关系s的交记作： 
+$$
+{\color{Green} r} {\color{Red} \cap}  {\color{Green} s}  =
+\left \{
+{\color{Green} t} \mid
+{\color{Green} t} \in {\color{Green} r}
+\wedge
+{\color{Green} t} \in {\color{Green} s}  
+\right \}
+$$
+</p></li>
+<li><p>结果关系：n目关系，由既属于r又属于s的所有元组组成。等价表示：关系交可以通过差来表达，即 
+$$
+{\color{Green} r} {\color{Red} \cap}  {\color{Green} s}  =
+{\color{Green} r} -
+\left(
+{\color{Green} r} - {\color{Green} s}
+\right)
+$$
+</p></li>
+</ul>
+<h4 id="笛卡尔积">4. 笛卡尔积</h4>
+<ul>
+<li>两个分别为n目和m目的关系r和s的笛卡尔积是一个n+m目元组的集合。</li>
+<li>元组的前n列是关系r的一个元组，后m列是关系s的一个元组。</li>
+<li>若关系r有kr个元组，关系s有ks个元组，则关系r和s的笛卡尔积有kr×ks个元组。 
+$$
+{\color{Green} r} {\color{Red} \times}  {\color{Green} s}  =
+\left \{
+{\color{Green} t_{r} } \cdot {\color{Green} t_{s}}
+\mid
+{\color{Green} t_{r}} \in {\color{Green} r}
+\wedge
+{\color{Green} t_{s}} \in {\color{Green} s}
+\right \}
+$$
+</li>
+</ul>
+<h3 id="专门的关系运算">2. 专门的关系运算</h3>
+<h4 id="选择">1. 选择</h4>
+<p>选择操作是在关系r中查找满足给定谓词（即选择条件）的所有元组，记作： 
+$$
+{\color{Red} \sigma_{{\color{Yellow} P} }} \left ( {\color{Green} r} \right ) =
+\left \{
+{\color{Green} t}  \mid {\color{Green} t}  \in
+\wedge
+{\color{Yellow} P} \left ({\color{Green} t} \right )
+\right \}
+$$
+ P：表示谓词(即选择条件)，它是一个逻辑表达式，取值为“真”或“假”。 说明：对关系从水平(行)角度进行运算，即选择操作。</p>
+<h4 id="投影">2. 投影</h4>
+<p>投影操作就是从关系r中选择若干属性列组成新的关系。 
+$$
+{\color{Red} \Pi _{{\color{Yellow} A} }} ({\color{Green} r} ) = \{{\color{Green} t}[{\color{Green} A} ]  \mid {\color{Green} t}  \in {\color{Green} r} \}
+$$
+ A：为关系r的属性集合。 说明：对关系从纵向(列)的角度进行，即投影操作。</p>
+<h4 id="连接">3. 连接</h4>
+<p>连接也称θ连接。记为A op B，A、B分别为关系r和s中的属性个数相等且可比的连接属性集，op为比较运算符。 θ连接是从两个关系的笛卡尔积中选取连接属性间满足谓词θ的所有元组。 
+$$
+{\color{Green} r} \, {\color{Red} \bowtie  _{{\color{Yellow} \theta } }} \, {\color{Green} s}  = \{{\color{Green} t_{r}} \cdot  {\color{Green} t_{s}} \mid {\color{Green} t_{s}}  \in {\color{Green} s} \wedge({\color{Green} r.A}  \, {\color{Yellow} op} \, {\color{Green} s.B} )\}
+$$
+</p>
+<h4 id="象集">4. 象集</h4>
+<p>给定关系r(A, B)，A和B是属性集。对任意t∈r，记t[A]=x，则在关系r中的属性集A的某个取值x的象集Bx定义： 
+$$
+{\color{Green} B} _{{\color{Yellow} x} } = \{ {\color{Green} t} {\color{Green} [B} ] \mid {\color{Green} t}  \in {\color{Green} r}  \wedge {\color{Green} t} [{\color{Green} A} ] = {\color{Yellow} x}  \}
+$$
+ 象集Bx的含义：表示关系r中属性集A上取值为x的所有元组在属性集B上的投影。</p>
+<h4 id="除运算">5. 除运算</h4>
+<p>设关系r®和s(S)，属性集S是R的子集，即S∈R，则关系r÷s是关系r中满足下列条件的元组在属性集R-S上的投影： trr，记 x= tr[R-S]，则关系r中属性集R-S的取值x的象集Sx包含关系s。记作 ： 
+$$
+{\color{Green} r} \, {\color{Red} {\div}}  \, {\color{Green} s} =
+\{ {\color{Green} t_{r}} [{\color{Purple} R-S} ] \mid {\color{Green} t_{r}}  \in {\color{Green} r}  \wedge
+{\color{Green} s}  \subseteq {\color{Green} S_{x}} \}
+$$
+</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93%EF%BC%8C%E7%AC%94%E8%AE%B0/">#数据库，笔记</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>【数据库】课堂笔记（一）数据库系统概论</div>
+      <div>https://chordfish-k.github.io/2023/03/04/database-20230304/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>超弦鱼</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年3月4日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/03/04/hello-world/" title="Hello World">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Hello World</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/03/01/kotlin-20230301/" title="【Kotlin】学习笔记（五）泛型">
+                        <span class="hidden-mobile">【Kotlin】学习笔记（五）泛型</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"xpIDGe0KryVmvXevjsKncS2c-gzGzoHsz","appKey":"zuJyO2kHgnrWTWhy7EMfTacX","path":"window.location.pathname","placeholder":"评论区使用详情见 “关于” 页","avatar":"retro","meta":["nick","mail","link"],"requiredFields":["nick"],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+  <script>
+  Fluid.utils.createScript('https://lib.baomitu.com/mermaid/8.14.0/mermaid.min.js', function() {
+    mermaid.initialize({"theme":"default"});
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('mermaid' in window) {
+        mermaid.init();
+      }
+    });
+  });
+</script>
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+    <!-- 备案信息 ICP for China -->
+    <div class="beian">
+  <span>
+    <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+      粤ICP备2022072107号
+    </a>
+  </span>
+  
+    
+      <span>
+        <a
+          href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44120202000585"
+          rel="nofollow noopener"
+          class="beian-police"
+          target="_blank"
+        >
+          
+            <span style="visibility: hidden; width: 0">|</span>
+            <img src="/img/police_beian.png" srcset="/img/loading.gif" lazyload alt="police-icon"/>
+          
+          <span>粤公网安备44120202000585号</span>
+        </a>
+      </span>
+    
+  
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

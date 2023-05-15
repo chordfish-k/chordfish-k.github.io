@@ -16,25 +16,26 @@
   <meta name="author" content="超弦鱼">
   <meta name="keywords" content="超弦鱼">
   
-    <meta name="description" content="本博客由 Valine 提供的评论区支持，依赖 Gravatar 头像服务。评论时必须填入昵称。另外，填写注册过Gravatar的邮箱即可显示自定义头像。 大致使用流程：  注册：进入 Gravatar 网站，点击页面的Sign Up进行注册。 验证：进入你的邮箱，从Gravatar发出的信件中拷贝那段链接地址，在浏览器输入。 设置昵称、密码。 选择上传图片：一般都是从电脑中上传（My">
+    <meta name="description" content="问题描述 django版本3.2 在做前后端分离项目过程中需要用到跨站点POST请求，但会被django拦截。尽管将settings.py中的django.middleware.csrf.CsrfViewMiddleware注释掉可以解决，但在正式部署的情况下是不能这么做的，因为这会导致全局的csrf防护失效从而出现漏洞。 解决方案 在settings.py中添加 12CSRF_TRUST">
 <meta property="og:type" content="article">
-<meta property="og:title" content="关于该博客的评论区">
-<meta property="og:url" content="https://chordfish-k.github.io/2023/01/12/other-20230112/index.html">
+<meta property="og:title" content="【Django+微信小程序】前后端分离跨站点POST请求踩坑实录">
+<meta property="og:url" content="https://chordfish-k.github.io/2023/05/15/django-20230515/index.html">
 <meta property="og:site_name" content="~超弦鱼🐟~">
-<meta property="og:description" content="本博客由 Valine 提供的评论区支持，依赖 Gravatar 头像服务。评论时必须填入昵称。另外，填写注册过Gravatar的邮箱即可显示自定义头像。 大致使用流程：  注册：进入 Gravatar 网站，点击页面的Sign Up进行注册。 验证：进入你的邮箱，从Gravatar发出的信件中拷贝那段链接地址，在浏览器输入。 设置昵称、密码。 选择上传图片：一般都是从电脑中上传（My">
+<meta property="og:description" content="问题描述 django版本3.2 在做前后端分离项目过程中需要用到跨站点POST请求，但会被django拦截。尽管将settings.py中的django.middleware.csrf.CsrfViewMiddleware注释掉可以解决，但在正式部署的情况下是不能这么做的，因为这会导致全局的csrf防护失效从而出现漏洞。 解决方案 在settings.py中添加 12CSRF_TRUST">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-01-12T06:58:34.000Z">
-<meta property="article:modified_time" content="2023-01-12T07:30:32.245Z">
+<meta property="article:published_time" content="2023-05-15T14:25:33.000Z">
+<meta property="article:modified_time" content="2023-05-15T14:43:15.597Z">
 <meta property="article:author" content="超弦鱼">
-<meta property="article:tag" content="评论">
-<meta property="article:tag" content="头像">
+<meta property="article:tag" content="Django">
+<meta property="article:tag" content="微信小程序">
+<meta property="article:tag" content="CSRF">
 <meta name="twitter:card" content="summary_large_image">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>关于该博客的评论区 - ~超弦鱼🐟~</title>
+  <title>【Django+微信小程序】前后端分离跨站点POST请求踩坑实录 - ~超弦鱼🐟~</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -200,7 +201,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="关于该博客的评论区"></span>
+            <span id="subtitle" data-typed-text="【Django+微信小程序】前后端分离跨站点POST请求踩坑实录"></span>
           
         </div>
 
@@ -211,8 +212,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-01-12 14:58" pubdate>
-          2023年1月12日 下午
+        <time datetime="2023-05-15 22:25" pubdate>
+          2023年5月15日 晚上
         </time>
       </span>
     
@@ -223,7 +224,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          495 字
+          1.5k 字
         
       </span>
     
@@ -234,7 +235,7 @@
         
         
         
-          5 分钟
+          13 分钟
         
       </span>
     
@@ -308,7 +309,7 @@
       
         <a href="/2023/05/15/django-20230515/" title="【Django+微信小程序】前后端分离跨站点POST请求踩坑实录"
            class="list-group-item list-group-item-action
-           ">
+           active">
           <span class="category-post">【Django+微信小程序】前后端分离跨站点POST请求踩坑实录</span>
         </a>
       
@@ -326,7 +327,7 @@
       
         <a href="/2023/01/12/other-20230112/" title="关于该博客的评论区"
            class="list-group-item list-group-item-action
-           active">
+           ">
           <span class="category-post">关于该博客的评论区</span>
         </a>
       
@@ -350,24 +351,25 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">关于该博客的评论区</h1>
+            <h1 style="display: none">【Django+微信小程序】前后端分离跨站点POST请求踩坑实录</h1>
             
             
               <div class="markdown-body">
                 
-                <p>本博客由 <a href="valine.js.org">Valine</a> 提供的评论区支持，依赖 <a target="_blank" rel="noopener" href="https://en.gravatar.com/">Gravatar</a> 头像服务。评论时<strong>必须</strong>填入昵称。另外，填写注册过Gravatar的邮箱即可显示自定义头像。</p>
-<p><strong>大致使用流程：</strong></p>
-<ol type="1">
-<li><p>注册：进入 <a target="_blank" rel="noopener" href="https://en.gravatar.com/">Gravatar</a> 网站，点击页面的Sign Up进行注册。</p></li>
-<li><p>验证：进入你的邮箱，从Gravatar发出的信件中拷贝那段链接地址，在浏览器输入。</p></li>
-<li><p>设置昵称、密码。</p></li>
-<li><p>选择上传图片：一般都是从电脑中上传（My computer’s hard drive）。</p></li>
-<li><p>剪裁大小</p></li>
-<li><p>评级：你的头像要被分级的，因为可能会有朋友喜欢用比较曝露的头像，会影响小朋友身心健康的说。如果你的图片不是特别那个的话，一般不用选择Sex或暴力之类的，直接选择G（通用型），这样基本任何网站都能显示这个等级的图片。异次元比较邪恶，暂时允许显示R级以下的头像…</p></li>
-<li><p>等待审核：可能需要站方短暂审核一下，一般选择了G，而你的图片没什么特别的，很快就通过。一般遇上慢的情况也就10分钟左右。</p></li>
-</ol>
-<p>完成了以上步骤，今后在支持Gravatar的网站留言都会显示你帅帅的头像了。</p>
-<p>原文链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/z_johnny/article/details/104211572/" class="uri">https://blog.csdn.net/z_johnny/article/details/104211572/</a></p>
+                <h2 id="问题描述">问题描述</h2>
+<p>django版本3.2 在做前后端分离项目过程中需要用到跨站点POST请求，但会被django拦截。尽管将<code>settings.py</code>中的<code>django.middleware.csrf.CsrfViewMiddleware</code>注释掉可以解决，但在正式部署的情况下是不能这么做的，因为这会导致全局的csrf防护失效从而出现漏洞。</p>
+<h2 id="解决方案">解决方案</h2>
+<p>在settings.py中添加</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">CSRF_TRUSTED_ORIGINS = [<span class="hljs-string">&#x27;servicewechat.com&#x27;</span>] <br><span class="hljs-comment">#这是微信小程序的官方服务器域名，所有请求都从这里发出</span><br></code></pre></td></tr></table></figure>
+<p>首先要使前后端能交流csrftoken和cookie:</p>
+<p><strong>Django后端：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># xxx/views.py</span><br><span class="hljs-keyword">from</span> django.middleware.csrf <span class="hljs-keyword">import</span> get_token<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">token</span>(<span class="hljs-params">request</span>):<br>    token=get_token(request)<br>    <span class="hljs-keyword">return</span> JsonResponse(&#123;<span class="hljs-string">&#x27;token&#x27;</span>:token&#125;)<br><br><span class="hljs-comment"># xxx/urls.py</span><br><span class="hljs-comment"># 添加：</span><br>path(<span class="hljs-string">&#x27;token&#x27;</span>, views.token)<br></code></pre></td></tr></table></figure>
+<p><strong>微信js前端：</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">function</span> <span class="hljs-title function_">getToken</span>(<span class="hljs-params">callback</span>) &#123;<br>  wx.<span class="hljs-title function_">request</span>(&#123;<br>    <span class="hljs-attr">url</span>: <span class="hljs-title class_">DBPath</span> + <span class="hljs-string">&#x27;token&#x27;</span>,<br>    <span class="hljs-attr">success</span>:<span class="hljs-function">(<span class="hljs-params">res</span>)=&gt;</span>&#123;<br>      <span class="hljs-keyword">if</span>(callback)<br>        <span class="hljs-title function_">callback</span>(res);<br>    &#125;<br>  &#125;);<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>在小程序启动或者登录的时候向后端发送获取<code>csrftoken</code>的请求</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-title function_">getToken</span>(<span class="hljs-function">(<span class="hljs-params">res</span>)=&gt;</span>&#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res)<br>    <span class="hljs-keyword">let</span> temp = (res.<span class="hljs-property">cookies</span>[<span class="hljs-number">0</span>].<span class="hljs-title function_">split</span>(<span class="hljs-string">&#x27;;&#x27;</span>)[<span class="hljs-number">0</span>]).<span class="hljs-title function_">split</span>(<span class="hljs-string">&#x27;=&#x27;</span>)[<span class="hljs-number">1</span>];<br>    <span class="hljs-comment">//split(&#x27;;&#x27;)[0]是因为csfttoken总是被django放在最前面</span><br>    wx.<span class="hljs-title function_">setStorageSync</span>(<span class="hljs-string">&#x27;csrftoken&#x27;</span>, res.<span class="hljs-property">data</span>.<span class="hljs-property">token</span>);<br>    wx.<span class="hljs-title function_">setStorageSync</span>(<span class="hljs-string">&#x27;cookie&#x27;</span>, res.<span class="hljs-property">header</span>[<span class="hljs-string">&#x27;Set-Cookie&#x27;</span>]);<br>&#125;)<br></code></pre></td></tr></table></figure>
+<p>在js的POST请求中添加请求头(以<code>wx.uploadFile</code>为例):</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs js">wx.<span class="hljs-title function_">uploadFile</span>(&#123;<br>    <span class="hljs-attr">filePath</span>: path,<br>    <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;file&#x27;</span>,<br>    <span class="hljs-attr">header</span>: &#123; <span class="hljs-comment">//必须包含cookie和X-CSRFToken</span><br>        <span class="hljs-string">&#x27;content-type&#x27;</span>: <span class="hljs-string">&#x27;application/x-www-form-urlencoded&#x27;</span>,<br>        <span class="hljs-string">&#x27;cookie&#x27;</span>: wx.<span class="hljs-title function_">getStorageSync</span>(<span class="hljs-string">&#x27;cookie&#x27;</span>),<br>        <span class="hljs-string">&#x27;X-CSRFToken&#x27;</span>:  wx.<span class="hljs-title function_">getStorageSync</span>(<span class="hljs-string">&#x27;csrftoken&#x27;</span>)<br>    &#125;,<br>    <span class="hljs-attr">formData</span>:&#123;<br>    <span class="hljs-comment">//csrfmiddlewaretoken:wx.getStorageSync(&#x27;csrftoken&#x27;),</span><br>    <span class="hljs-attr">openid</span>: openid<br>    &#125;,<br>    <br>    <span class="hljs-attr">url</span>: <span class="hljs-title class_">DBPath</span> + <span class="hljs-string">&#x27;upload-avatar&#x27;</span>,<br>&#125;<br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -401,9 +403,11 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/%E8%AF%84%E8%AE%BA/">#评论</a>
+        <a href="/tags/Django/">#Django</a>
       
-        <a href="/tags/%E5%A4%B4%E5%83%8F/">#头像</a>
+        <a href="/tags/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/">#微信小程序</a>
+      
+        <a href="/tags/CSRF/">#CSRF</a>
       
     </div>
   
@@ -415,8 +419,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>关于该博客的评论区</div>
-      <div>https://chordfish-k.github.io/2023/01/12/other-20230112/</div>
+      <div>【Django+微信小程序】前后端分离跨站点POST请求踩坑实录</div>
+      <div>https://chordfish-k.github.io/2023/05/15/django-20230515/</div>
     </div>
     <div class="license-meta">
       
@@ -428,7 +432,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年1月12日</div>
+          <div>2023年5月15日</div>
         </div>
       
       
@@ -460,18 +464,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/02/01/kotlin/kotlin-20230201/" title="【Kotlin】学习笔记（一）变量、函数与逻辑控制">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">【Kotlin】学习笔记（一）变量、函数与逻辑控制</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/01/12/unity/unity-20230112/" title="【Unity】人物跳跃卡墙Bug的解决方法">
-                        <span class="hidden-mobile">【Unity】人物跳跃卡墙Bug的解决方法</span>
+                      <a href="/2023/04/22/django-20230422/" title="【Django】宝塔+Django3+uwsgi+nginx+MySQL部署踩坑实录">
+                        <span class="hidden-mobile">【Django】宝塔+Django3+uwsgi+nginx+MySQL部署踩坑实录</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

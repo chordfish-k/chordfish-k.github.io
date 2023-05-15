@@ -4,6 +4,66 @@
   
   
   <entry>
+    <title>【Django+微信小程序】前后端分离跨站点POST请求踩坑实录</title>
+    <link href="/2023/05/15/django-20230515/"/>
+    <url>/2023/05/15/django-20230515/</url>
+    
+    <content type="html"><![CDATA[<h2 id="问题描述">问题描述</h2><p>django版本3.2 在做前后端分离项目过程中需要用到跨站点POST请求，但会被django拦截。尽管将<code>settings.py</code>中的<code>django.middleware.csrf.CsrfViewMiddleware</code>注释掉可以解决，但在正式部署的情况下是不能这么做的，因为这会导致全局的csrf防护失效从而出现漏洞。</p><h2 id="解决方案">解决方案</h2><p>在settings.py中添加</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">CSRF_TRUSTED_ORIGINS = [<span class="hljs-string">&#x27;servicewechat.com&#x27;</span>] <br><span class="hljs-comment">#这是微信小程序的官方服务器域名，所有请求都从这里发出</span><br></code></pre></td></tr></table></figure><p>首先要使前后端能交流csrftoken和cookie:</p><p><strong>Django后端：</strong></p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># xxx/views.py</span><br><span class="hljs-keyword">from</span> django.middleware.csrf <span class="hljs-keyword">import</span> get_token<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">token</span>(<span class="hljs-params">request</span>):<br>    token=get_token(request)<br>    <span class="hljs-keyword">return</span> JsonResponse(&#123;<span class="hljs-string">&#x27;token&#x27;</span>:token&#125;)<br><br><span class="hljs-comment"># xxx/urls.py</span><br><span class="hljs-comment"># 添加：</span><br>path(<span class="hljs-string">&#x27;token&#x27;</span>, views.token)<br></code></pre></td></tr></table></figure><p><strong>微信js前端：</strong></p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">function</span> <span class="hljs-title function_">getToken</span>(<span class="hljs-params">callback</span>) &#123;<br>  wx.<span class="hljs-title function_">request</span>(&#123;<br>    <span class="hljs-attr">url</span>: <span class="hljs-title class_">DBPath</span> + <span class="hljs-string">&#x27;token&#x27;</span>,<br>    <span class="hljs-attr">success</span>:<span class="hljs-function">(<span class="hljs-params">res</span>)=&gt;</span>&#123;<br>      <span class="hljs-keyword">if</span>(callback)<br>        <span class="hljs-title function_">callback</span>(res);<br>    &#125;<br>  &#125;);<br>&#125;<br></code></pre></td></tr></table></figure><p>在小程序启动或者登录的时候向后端发送获取<code>csrftoken</code>的请求</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-title function_">getToken</span>(<span class="hljs-function">(<span class="hljs-params">res</span>)=&gt;</span>&#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res)<br>    <span class="hljs-keyword">let</span> temp = (res.<span class="hljs-property">cookies</span>[<span class="hljs-number">0</span>].<span class="hljs-title function_">split</span>(<span class="hljs-string">&#x27;;&#x27;</span>)[<span class="hljs-number">0</span>]).<span class="hljs-title function_">split</span>(<span class="hljs-string">&#x27;=&#x27;</span>)[<span class="hljs-number">1</span>];<br>    <span class="hljs-comment">//split(&#x27;;&#x27;)[0]是因为csfttoken总是被django放在最前面</span><br>    wx.<span class="hljs-title function_">setStorageSync</span>(<span class="hljs-string">&#x27;csrftoken&#x27;</span>, res.<span class="hljs-property">data</span>.<span class="hljs-property">token</span>);<br>    wx.<span class="hljs-title function_">setStorageSync</span>(<span class="hljs-string">&#x27;cookie&#x27;</span>, res.<span class="hljs-property">header</span>[<span class="hljs-string">&#x27;Set-Cookie&#x27;</span>]);<br>&#125;)<br></code></pre></td></tr></table></figure><p>在js的POST请求中添加请求头(以<code>wx.uploadFile</code>为例):</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs js">wx.<span class="hljs-title function_">uploadFile</span>(&#123;<br>    <span class="hljs-attr">filePath</span>: path,<br>    <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;file&#x27;</span>,<br>    <span class="hljs-attr">header</span>: &#123; <span class="hljs-comment">//必须包含cookie和X-CSRFToken</span><br>        <span class="hljs-string">&#x27;content-type&#x27;</span>: <span class="hljs-string">&#x27;application/x-www-form-urlencoded&#x27;</span>,<br>        <span class="hljs-string">&#x27;cookie&#x27;</span>: wx.<span class="hljs-title function_">getStorageSync</span>(<span class="hljs-string">&#x27;cookie&#x27;</span>),<br>        <span class="hljs-string">&#x27;X-CSRFToken&#x27;</span>:  wx.<span class="hljs-title function_">getStorageSync</span>(<span class="hljs-string">&#x27;csrftoken&#x27;</span>)<br>    &#125;,<br>    <span class="hljs-attr">formData</span>:&#123;<br>    <span class="hljs-comment">//csrfmiddlewaretoken:wx.getStorageSync(&#x27;csrftoken&#x27;),</span><br>    <span class="hljs-attr">openid</span>: openid<br>    &#125;,<br>    <br>    <span class="hljs-attr">url</span>: <span class="hljs-title class_">DBPath</span> + <span class="hljs-string">&#x27;upload-avatar&#x27;</span>,<br>&#125;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>其他</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Django</tag>
+      
+      <tag>微信小程序</tag>
+      
+      <tag>CSRF</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>【Django】宝塔+Django3+uwsgi+nginx+MySQL部署踩坑实录</title>
+    <link href="/2023/04/22/django-20230422/"/>
+    <url>/2023/04/22/django-20230422/</url>
+    
+    <content type="html"><![CDATA[<p>待补充</p><h2 id="一服务器与宝塔面板">一、服务器与宝塔面板</h2><h3 id="镜像挑选">1. 镜像挑选</h3><p>这里我在腾讯云选购了亚太地区的服务器，选宝塔的应用模板。 选用宝塔是想降低部署难度。</p><figure><img src="img/post/20230422/01.png" alt="" /><figcaption>宝塔实例</figcaption></figure><h3 id="更改root密码">2. 更改root密码</h3><p>在<code>更多 -&gt; 重置密码</code>里面重置root的密码</p><h3 id="配置宝塔面板">3. 配置宝塔面板</h3><p>实例启动之后，放行宝塔的端口</p><figure><img src="img/post/20230422/02.png" alt="" /><figcaption>放行宝塔端口</figcaption></figure><p>查看宝塔的账号密码：</p><blockquote><p>/etc/init.d/bt default</p></blockquote><p>会看到: &gt;宝塔面板 &gt; &gt;外网面板地址: http://<strong>.</strong>.<em><strong>.</strong>:8888/</em>******* &gt;内网面板地址: http://<strong>.<em>.</em>.</strong>:8888/******** &gt; &gt;宝塔后台的用户名密码 &gt;username: ******* &gt;password: ********</p><p>根据上面的信息,进入宝塔面板,输入账号密码,然后有三件要做的事:</p><ol type="1"><li><p>注册并绑定宝塔账号</p></li><li><p>你安装LAMP, 选左边带nginx的安装</p></li><li><p>配置好你实例的镜像,按他的提示来就可以了</p></li></ol><h2 id="二mysql配置">二、MySQL配置</h2><p>自带MySQL的版本是<code>5.7</code></p><h3 id="创建数据库">1. 创建数据库</h3><h3 id="放行3306端口">2. 放行3306端口</h3><p><strong>宝塔面板</strong>和<strong>腾讯云</strong>的都要放行</p><h3 id="更改访问权限">3. 更改访问权限</h3><p>更改成所有人可访问</p><h3 id="测试连接">4. 测试连接</h3><p>我这里分别使用自带的phpMyAdmin和本地的SQLyog进行测试</p><h2 id="三django配置">三、Django配置</h2><h3 id="创建virtualenv虚拟环境">1. 创建virtualenv虚拟环境</h3><p>该实例自带两个python版本<code>python2(.7)</code>和<code>python3(.6)</code></p><p>为了避免权限问题, 我选择直接在<code>/www</code>下创建: &gt; cd /www/wwwroot/django</p><h3 id="配置需要用到的库">2. 配置需要用到的库</h3><blockquote><p>pip install django pymysql mysqlclien</p></blockquote><h3 id="创建一个测试项目">3. 创建一个测试项目</h3><h2 id="四uwsgi配置">四、uwsgi配置</h2><h3 id="配置uwsgi.ini">1. 配置uwsgi.ini</h3><p>在<code>manage.py</code>同级目录中创建<code>uwsgi.ini</code>,内容如下:</p><h3 id="安装uwsgi">2. 安装uwsgi</h3><blockquote><p>yum python-devel pip install uwsgi</p></blockquote><h3 id="测试uwsgi">3. 测试uwsgi</h3><h2 id="五nginx反向代理">五、nginx反向代理</h2><h2 id="六ssh连接测试">六、ssh连接测试</h2>]]></content>
+    
+    
+    <categories>
+      
+      <category>其他</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Django</tag>
+      
+      <tag>uwsgi</tag>
+      
+      <tag>nginx</tag>
+      
+      <tag>MySQL</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>【Kotlin】学习笔记（六）扩展函数、运算符重载</title>
     <link href="/2023/04/17/kotlin/kotlin-20230417/"/>
     <url>/2023/04/17/kotlin/kotlin-20230417/</url>

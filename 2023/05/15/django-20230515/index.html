@@ -16,12 +16,12 @@
   <meta name="author" content="超弦鱼">
   <meta name="keywords" content="超弦鱼">
   
-    <meta name="description" content="问题描述 django版本3.2 在做前后端分离项目过程中需要用到跨站点POST请求，但会被django拦截。尽管将settings.py中的django.middleware.csrf.CsrfViewMiddleware注释掉可以解决，但在正式部署的情况下是不能这么做的，因为这会导致全局的csrf防护失效从而出现漏洞。 解决方案 在settings.py中添加 12CSRF_TRUSTED_O">
+    <meta name="description" content="问题描述 django版本3.2 在做前后端分离项目过程中需要用到跨站点POST请求，但会被django拦截。尽管将settings.py中的django.middleware.csrf.CsrfViewMiddleware注释掉可以解决，但在正式部署的情况下是不能这么做的，因为这会导致全局的csrf防护失效从而出现漏洞。 解决方案 在settings.py中添加 12CSRF_TRUST">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【Django+微信小程序】前后端分离跨站点POST请求踩坑实录">
 <meta property="og:url" content="https://chordfish-k.github.io/2023/05/15/django-20230515/index.html">
 <meta property="og:site_name" content="~超弦鱼🐟~">
-<meta property="og:description" content="问题描述 django版本3.2 在做前后端分离项目过程中需要用到跨站点POST请求，但会被django拦截。尽管将settings.py中的django.middleware.csrf.CsrfViewMiddleware注释掉可以解决，但在正式部署的情况下是不能这么做的，因为这会导致全局的csrf防护失效从而出现漏洞。 解决方案 在settings.py中添加 12CSRF_TRUSTED_O">
+<meta property="og:description" content="问题描述 django版本3.2 在做前后端分离项目过程中需要用到跨站点POST请求，但会被django拦截。尽管将settings.py中的django.middleware.csrf.CsrfViewMiddleware注释掉可以解决，但在正式部署的情况下是不能这么做的，因为这会导致全局的csrf防护失效从而出现漏洞。 解决方案 在settings.py中添加 12CSRF_TRUST">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-05-15T14:25:33.000Z">
 <meta property="article:modified_time" content="2023-05-15T14:52:17.970Z">
@@ -357,8 +357,7 @@
               <div class="markdown-body">
                 
                 <h2 id="问题描述">问题描述</h2>
-<p>django版本3.2<br>
-在做前后端分离项目过程中需要用到跨站点POST请求，但会被django拦截。尽管将<code>settings.py</code>中的<code>django.middleware.csrf.CsrfViewMiddleware</code>注释掉可以解决，但在正式部署的情况下是不能这么做的，因为这会导致全局的csrf防护失效从而出现漏洞。</p>
+<p>django版本3.2 在做前后端分离项目过程中需要用到跨站点POST请求，但会被django拦截。尽管将<code>settings.py</code>中的<code>django.middleware.csrf.CsrfViewMiddleware</code>注释掉可以解决，但在正式部署的情况下是不能这么做的，因为这会导致全局的csrf防护失效从而出现漏洞。</p>
 <h2 id="解决方案">解决方案</h2>
 <p>在settings.py中添加</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">CSRF_TRUSTED_ORIGINS = [<span class="hljs-string">&#x27;servicewechat.com&#x27;</span>] <br><span class="hljs-comment">#这是微信小程序的官方服务器域名，所有请求都从这里发出</span><br></code></pre></td></tr></table></figure>

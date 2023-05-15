@@ -241,7 +241,7 @@
       
       <a class="index-excerpt " href="/2023/05/15/django-20230515/" target="_self">
         <div>
-          问题描述 django版本3.2 在做前后端分离项目过程中需要用到跨站点POST请求，但会被django拦截。尽管将settings.py中的django.middleware.csrf.CsrfViewMiddleware注释掉可以解决，但在正式部署的情况下是不能这么做的，因为这会导致全局的csrf防护失效从而出现漏洞。 解决方案 在settings.py中添加 12CSRF_TRUSTED_O
+          问题描述 django版本3.2 在做前后端分离项目过程中需要用到跨站点POST请求，但会被django拦截。尽管将settings.py中的django.middleware.csrf.CsrfViewMiddleware注释掉可以解决，但在正式部署的情况下是不能这么做的，因为这会导致全局的csrf防护失效从而出现漏洞。 解决方案 在settings.py中添加 12CSRF_TRUST
         </div>
       </a>
 
@@ -312,7 +312,7 @@
       
       <a class="index-excerpt " href="/2023/04/22/django-20230422/" target="_self">
         <div>
-          待补充 一、服务器与宝塔面板 1. 镜像挑选 这里我在腾讯云选购了亚太地区的服务器，选宝塔的应用模板。 选用宝塔是想降低部署难度。  2. 更改root密码 在更多 -&gt; 重置密码里面重置root的密码 3. 配置宝塔面板 实例启动之后，放行宝塔的端口  查看宝塔的账号密码：  /etc/init.d/bt default  会看到:  宝塔面板 外网面板地址: http://...:888
+          待补充 一、服务器与宝塔面板 1. 镜像挑选 这里我在腾讯云选购了亚太地区的服务器，选宝塔的应用模板。 选用宝塔是想降低部署难度。  宝塔实例  2. 更改root密码 在更多 -&gt; 重置密码里面重置root的密码 3. 配置宝塔面板 实例启动之后，放行宝塔的端口  放行宝塔端口  查看宝塔的账号密码：  /etc/init.d/bt default  会
         </div>
       </a>
 
@@ -385,7 +385,7 @@
       
       <a class="index-excerpt " href="/2023/04/17/kotlin/kotlin-20230417/" target="_self">
         <div>
-          一、扩展函数   扩展函数可以在不修改类的定义的情况下，为类增加新的功能，可以为自定义类扩展，也可以扩展内置的类如String、List   扩展函数的语法结构   123fun ClassName.methodName(param1: Int, param2: Int): Int &#123;    return 0&#125; 如果要给String类增加一个letterCount方法对字符串中
+          一、扩展函数  扩展函数可以在不修改类的定义的情况下，为类增加新的功能，可以为自定义类扩展，也可以扩展内置的类如String、List 扩展函数的语法结构  123fun ClassName.methodName(param1: Int, param2: Int): Int &#123;    return 0&#125; 如果要给String类增加一个letterCount方法对字符
         </div>
       </a>
 
@@ -458,7 +458,7 @@
       
       <a class="index-excerpt " href="/2023/03/04/database-20230304/" target="_self">
         <div>
-          一、关系模型  关系数据库系统：RDBMS，支持关系数据模型的数据库系统，当今的主流数据库管理系统。 关系模型的构成：由关系数据结构、关系操作集合和关系完整性约束三部分组成。  1. 关系数据结构 1. 关系  关系模型的数据结构简单，即二维表，亦称为关系 关系数据库：表的集合，即关系的集合。 表：一个实体集，一行就是一个实体，它由共同表示一个实体的相关联的若干属性的值所构成。  2. 关系模式
+          一、关系模型  关系数据库系统：RDBMS，支持关系数据模型的数据库系统，当今的主流数据库管理系统。 关系模型的构成：由关系数据结构、关系操作集合和关系完整性约束三部分组成。  1. 关系数据结构 1. 关系  关系模型的数据结构简单，即二维表，亦称为关系 关系数据库：表的集合，即关系的集合。 表：一个实体集，一行就是一个实体，它由共同表示一个实体的相关联的若干属性的值所构成。
         </div>
       </a>
 
@@ -525,7 +525,7 @@
       
       <a class="index-excerpt " href="/2023/03/01/kotlin/kotlin-20230301/" target="_self">
         <div>
-          一、泛型方法 12345678fun &lt;T&gt; fromJson(json: String, tClass: Class&lt;T&gt;): T? &#123; /*可空返回值*/    val instance: T? = tClass.newInstance()    return instance&#125;fun main() &#123;    fromJson&lt;Str
+          一、泛型方法 12345678fun &lt;T&gt; fromJson(json: String, tClass: Class&lt;T&gt;): T? &#123; /*可空返回值*/    val instance: T? = tClass.newInstance()    return instance&#125;fun main() &#123;    fromJson&lt;St
         </div>
       </a>
 
@@ -596,7 +596,7 @@
       
       <a class="index-excerpt " href="/2023/02/23/database-20230223/" target="_self">
         <div>
-          一、数据与数据管理   数据 描述事物的符号记录称为数据。数据是数据库(DB)中存储的对象，也是数据库管理系统(DBMS)处理的对象。 结构化数据：由数据库二维逻辑结构（表格）描述的数据。 非结构化数据：不方便用数据库二维逻辑结构表现的数据，包括所有文档、文本、图片、音视频等。 半结构化数据：介于完全结构化数据（关系型数据库，面向对象数据库中的数据）和完全无结构的数据（如自然语言文本、音视频、图像
+          一、数据与数据管理  数据 描述事物的符号记录称为数据。数据是数据库(DB)中存储的对象，也是数据库管理系统(DBMS)处理的对象。 结构化数据：由数据库二维逻辑结构（表格）描述的数据。 非结构化数据：不方便用数据库二维逻辑结构表现的数据，包括所有文档、文本、图片、音视频等。 半结构化数据：介于完全结构化数据（关系型数据库，面向对象数据库中的数据）和完全无结构的数据（如自然语言文本、音
         </div>
       </a>
 
@@ -663,7 +663,7 @@
       
       <a class="index-excerpt " href="/2023/02/04/kotlin/kotlin-20230204/" target="_self">
         <div>
-          一、List 在Java中，我们可以使用ArraryList，当然在Kotlin中也可以这么做： 1234val list1 = ArraryList&lt;String&gt;()list1.add(&quot;Apple&quot;)list1.add(&quot;Banana&quot;)list1.add(&quot;Pear&quot;) Kotlin中提供了两种内置函数 listOf(
+          一、List 在Java中，我们可以使用ArraryList，当然在Kotlin中也可以这么做： 1234val list1 = ArraryList&lt;String&gt;()list1.add(&quot;Apple&quot;)list1.add(&quot;Banana&quot;)list1.add(&quot;Pear&quot;) Kotlin中提供了两种内置函数 list
         </div>
       </a>
 
@@ -734,7 +734,7 @@
       
       <a class="index-excerpt " href="/2023/02/03/kotlin/kotlin-20230203/" target="_self">
         <div>
-          1.Lambda变量 1234567val sum = &#123;a: Int, b: Int -&gt;     a + b&#125;fun main() &#123;    println(sum(1, 3))&#125; 2.Lambda表达式作为参数（匿名函数） 123456789101112131415161718192021fun transform(arr: Array&lt;I
+          1.Lambda变量 1234567val sum = &#123;a: Int, b: Int -&gt;     a + b&#125;fun main() &#123;    println(sum(1, 3))&#125; 2.Lambda表达式作为参数（匿名函数） 123456789101112131415161718192021fun transform(arr: Array&l
         </div>
       </a>
 
@@ -805,7 +805,7 @@
       
       <a class="index-excerpt " href="/2023/02/02/kotlin/kotlin-20230202/" target="_self">
         <div>
-          一、类与对象 下面的将示范如何创建一个Kotlin类： 12345678class Person &#123;      //类名：Person    var name = &quot;&quot;   //类成员变量    var age = 0    fun show() &#123;    //类成员函数        println(name + &quot;，&quot; + age +
+          一、类与对象 下面的将示范如何创建一个Kotlin类： 12345678class Person &#123;      //类名：Person    var name = &quot;&quot;   //类成员变量    var age = 0    fun show() &#123;    //类成员函数        println(name + &quot;，&quot; + age
         </div>
       </a>
 
@@ -876,7 +876,7 @@
       
       <a class="index-excerpt " href="/2023/02/01/kotlin/kotlin-20230201/" target="_self">
         <div>
-          一、变量 1.定义方法 在Kotlin中，我们使用关键字val或var来声明一个变(常)量。 val: 声明一个常量，相当于java中的final变量，无法二次赋值 var: 声明一个变量  用例： 12val a = 114var b = 5.14 Kotlin具备优秀的类型推导能力，它会将a的类型推导为Int，并将b的类型推导为Double。 2.变量类型 例： 12val a : Int =
+          一、变量 1.定义方法 在Kotlin中，我们使用关键字val或var来声明一个变(常)量。 val: 声明一个常量，相当于java中的final变量，无法二次赋值 var: 声明一个变量 用例： 12val a = 114var b = 5.14 Kotlin具备优秀的类型推导能力，它会将a的类型推导为Int，并将b的类型推导为Double。 2.变量类型 例： 12val
         </div>
       </a>
 

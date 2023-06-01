@@ -24,7 +24,7 @@
 <meta property="og:description" content="一、关系模型  关系数据库系统：RDBMS，支持关系数据模型的数据库系统，当今的主流数据库管理系统。 关系模型的构成：由关系数据结构、关系操作集合和关系完整性约束三部分组成。  1. 关系数据结构 1. 关系  关系模型的数据结构简单，即二维表，亦称为关系 关系数据库：表的集合，即关系的集合。 表：一个实体集，一行就是一个实体，它由共同表示一个实体的相关联的若干属性的值所构成。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-03-04T10:08:59.000Z">
-<meta property="article:modified_time" content="2023-03-04T12:54:44.259Z">
+<meta property="article:modified_time" content="2023-06-01T07:39:47.367Z">
 <meta property="article:author" content="超弦鱼">
 <meta property="article:tag" content="数据库，笔记">
 <meta name="twitter:card" content="summary_large_image">
@@ -410,7 +410,7 @@
 </ul></li>
 </ul>
 <h2 id="二-关系代数">二、 关系代数</h2>
-<p>关系代数通过关系代数运算构成的表达式来表达查询。 基本的关系代数运算：<code>选择</code>、<code>投影</code>、<code>集合并</code>、<code>集合差</code>、<code>笛卡尔积</code>和<code>更名</code>等。 运算三要素：运算对象、运算符和运算结果。 关系代数运算是以一个或两个关系作为输入(运算对象)产生一个新的关系作为结果（运算结果 ）。</p>
+<p>关系代数通过关系代数运算构成的表达式来表达查询。 五种基本关系代数运算是：<code>∪，-，×，π和σ</code></p>
 <h3 id="传统的集合运算">1. 传统的集合运算</h3>
 <h4 id="并">1. 并</h4>
 <ul>
@@ -469,7 +469,7 @@ $$
 <ul>
 <li>两个分别为n目和m目的关系r和s的笛卡尔积是一个n+m目元组的集合。</li>
 <li>元组的前n列是关系r的一个元组，后m列是关系s的一个元组。</li>
-<li>若关系r有kr个元组，关系s有ks个元组，则关系r和s的笛卡尔积有kr×ks个元组。 
+<li>若关系r有kr个元组，关系s有ks个元组，则关系r和s的笛卡尔积有kr×ks个元组。<code>笛卡尔积基数：kr*ks</code> 
 $$
 {\color{Green} r} {\color{Red} \times}  {\color{Green} s}  =
 \left \{
@@ -506,13 +506,13 @@ $$
 {\color{Green} r} \, {\color{Red} \bowtie  _{{\color{Yellow} \theta } }} \, {\color{Green} s}  = \{{\color{Green} t_{r}} \cdot  {\color{Green} t_{s}} \mid {\color{Green} t_{s}}  \in {\color{Green} s} \wedge({\color{Green} r.A}  \, {\color{Yellow} op} \, {\color{Green} s.B} )\}
 $$
 </p>
-<h4 id="象集">4. 象集</h4>
+<h4 id="象集非重点">4. 象集(非重点)</h4>
 <p>给定关系r(A, B)，A和B是属性集。对任意t∈r，记t[A]=x，则在关系r中的属性集A的某个取值x的象集Bx定义： 
 $$
 {\color{Green} B} _{{\color{Yellow} x} } = \{ {\color{Green} t} {\color{Green} [B} ] \mid {\color{Green} t}  \in {\color{Green} r}  \wedge {\color{Green} t} [{\color{Green} A} ] = {\color{Yellow} x}  \}
 $$
  象集Bx的含义：表示关系r中属性集A上取值为x的所有元组在属性集B上的投影。</p>
-<h4 id="除运算">5. 除运算</h4>
+<h4 id="除运算非重点">5. 除运算(非重点)</h4>
 <p>设关系r®和s(S)，属性集S是R的子集，即S∈R，则关系r÷s是关系r中满足下列条件的元组在属性集R-S上的投影： trr，记 x= tr[R-S]，则关系r中属性集R-S的取值x的象集Sx包含关系s。记作 ： 
 $$
 {\color{Green} r} \, {\color{Red} {\div}}  \, {\color{Green} s} =

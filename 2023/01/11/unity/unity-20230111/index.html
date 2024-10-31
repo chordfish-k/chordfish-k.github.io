@@ -16,12 +16,12 @@
   <meta name="author" content="超弦鱼">
   <meta name="keywords" content="超弦鱼">
   
-    <meta name="description" content="问题描述 今天使用Unity时发现：物体没有按照动画设置的参数运动。 我为人物设置了攻击动画，由于人物不对称，故左右独立设置。如图是其中一段动画，其中设置了攻击区域触发器的变化动画。">
+    <meta name="description" content="问题描述 今天使用Unity时发现：物体没有按照动画设置的参数运动。 我为人物设置了攻击动画，由于人物不对称，故左右独立设置。如图是其中一段动画，其中设置了攻击区域触发器的变化动画。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【Unity】因使用混合树而导致的奇怪Bug(已修复)">
 <meta property="og:url" content="https://chordfish-k.github.io/2023/01/11/unity/unity-20230111/index.html">
 <meta property="og:site_name" content="~超弦鱼🐟~">
-<meta property="og:description" content="问题描述 今天使用Unity时发现：物体没有按照动画设置的参数运动。 我为人物设置了攻击动画，由于人物不对称，故左右独立设置。如图是其中一段动画，其中设置了攻击区域触发器的变化动画。">
+<meta property="og:description" content="问题描述 今天使用Unity时发现：物体没有按照动画设置的参数运动。 我为人物设置了攻击动画，由于人物不对称，故左右独立设置。如图是其中一段动画，其中设置了攻击区域触发器的变化动画。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://chordfish-k.github.io/img/post/20230111/02-smil.png">
 <meta property="article:published_time" content="2023-01-11T11:00:13.000Z">
@@ -227,7 +227,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          444 字
+          414 字
         
       </span>
     
@@ -354,45 +354,35 @@
 <p>今天使用Unity时发现：<strong>物体没有按照动画设置的参数运动</strong>。</p>
 <p>我为人物设置了攻击动画，由于人物不对称，故左右独立设置。如图是其中一段动画，其中设置了攻击区域触发器的变化动画。</p>
 <span id="more"></span>
-<figure>
-<img src="/img/post/20230111/01-smil.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>应当正确显示的情况</figcaption>
-</figure>
+<p><img src="/img/post/20230111/01-smil.png" srcset="/img/loading.gif" lazyload alt="应当正确显示的情况"></p>
 <p>但当我运行时，<strong>攻击区域触发器却发生了奇怪的位移</strong>，跟动画clip中的设置不一致。</p>
-<figure>
-<img src="/img/post/20230111/02-smil.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>运行后发现攻击触发器的位置不正确</figcaption>
-</figure>
-<p></br></p>
+<p><img src="/img/post/20230111/02-smil.png" srcset="/img/loading.gif" lazyload alt="运行后发现攻击触发器的位置不正确"></p>
+</br>
 <h2 id="问题排查">问题排查</h2>
 <p>经过2小时的折磨，在同学的帮助下终于锁定问题关键：</p>
 <table>
 <thead>
-<tr class="header">
-<th><img src="/img/post/20230111/03-smil.png" srcset="/img/loading.gif" lazyload alt="03.jpg" /></th>
-<th><img src="/img/post/20230111/05-smil.png" srcset="/img/loading.gif" lazyload alt="05.jpg" /></th>
+<tr>
+<th><img src="/img/post/20230111/03-smil.png" srcset="/img/loading.gif" lazyload alt="03.jpg"></th>
+<th><img src="/img/post/20230111/05-smil.png" srcset="/img/loading.gif" lazyload alt="05.jpg"></th>
 </tr>
 </thead>
-<tbody>
-</tbody>
 </table>
 <p>我使用了 <strong>混合树</strong> 来控制人物的左右攻击，恰恰就是这个混合树出了问题。</p>
-<p>结论就是：<strong>混合树将我的左右两个动画的攻击区域触发器的各项参数进行混合，其中就包括了触发器形状的offset</strong>！这导致两个动画各自触发器形状的offset叠加而抵消，使其最后显示的<strong><em>offset的x值始终在0附近</em></strong>。</p>
-<p></br></p>
+<p>结论就是：<strong>混合树将我的左右两个动画的攻击区域触发器的各项参数进行混合，其中就包括了触发器形状的offset</strong>！这导致两个动画各自触发器形状的offset叠加而抵消，使其最后显示的<em><strong>offset的x值始终在0附近</strong></em>。</p>
+</br>
 <h2 id="问题解决">问题解决</h2>
 <p>最后简单粗暴地解决了：放弃使用混合树控制左右动画。经过检验这样是可行的。</p>
-<figure>
-<img src="/img/post/20230111/04-smil.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>弃用混合树</figcaption>
-</figure>
+<p><img src="/img/post/20230111/04-smil.png" srcset="/img/loading.gif" lazyload alt="弃用混合树"></p>
 <p>原本我使用混合树仅仅只是想优化一下拓扑结构。。。现在不能这么玩了。</br></p>
 <p>我创建了子状态机，然后把攻击动画的逻辑全塞里面。。。让他看起来。。额。。至少没这么复杂(大概)。</p>
 <table>
 <thead>
-<tr class="header">
-<th><img src="/img/post/20230111/06-smil.png" srcset="/img/loading.gif" lazyload alt="06.jpg" /></th>
-<th><img src="/img/post/20230111/07-smil.png" srcset="/img/loading.gif" lazyload alt="07.jpg" /></th>
+<tr>
+<th><img src="/img/post/20230111/06-smil.png" srcset="/img/loading.gif" lazyload alt="06.jpg"></th>
+<th><img src="/img/post/20230111/07-smil.png" srcset="/img/loading.gif" lazyload alt="07.jpg"></th>
 </tr>
 </thead>
-<tbody>
-</tbody>
 </table>
 
                 

@@ -16,21 +16,21 @@
   <meta name="author" content="超弦鱼">
   <meta name="keywords" content="超弦鱼">
   
-    <meta name="description" content="问题描述 发现人物在跳跃时如果碰到墙壁，会卡住不动。  卡墙  原因是人物的RigidBody没有物理材质，导致其产生的摩擦力无限大，造成了卡墙现象  人物的RigidBody2D  问题解决 给人物设置两个物理材质，一个有摩擦，一个无摩擦。 在人物跳跃时切换无摩擦材质，其他情况切换有摩擦的材质。  两种材质  12345678910111213&#x2F;&#x2F;物理材质publi">
+    <meta name="description" content="问题描述 发现人物在跳跃时如果碰到墙壁，会卡住不动。  原因是人物的RigidBody没有物理材质，导致其产生的摩擦力无限大，造成了卡墙现象  问题解决 给人物设置两个物理材质，一个有摩擦，一个无摩擦。 在人物跳跃时切换无摩擦材质，其他情况切换有摩擦的材质。  12345678910111213&#x2F;&#x2F;物理材质public PhysicsMaterial2D pm_normal; public Phy">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【Unity】人物跳跃卡墙Bug的解决方法">
 <meta property="og:url" content="https://chordfish-k.github.io/2023/01/12/unity/unity-20230112/index.html">
 <meta property="og:site_name" content="~超弦鱼🐟~">
-<meta property="og:description" content="问题描述 发现人物在跳跃时如果碰到墙壁，会卡住不动。  卡墙  原因是人物的RigidBody没有物理材质，导致其产生的摩擦力无限大，造成了卡墙现象  人物的RigidBody2D  问题解决 给人物设置两个物理材质，一个有摩擦，一个无摩擦。 在人物跳跃时切换无摩擦材质，其他情况切换有摩擦的材质。  两种材质  12345678910111213&#x2F;&#x2F;物理材质publi">
+<meta property="og:description" content="问题描述 发现人物在跳跃时如果碰到墙壁，会卡住不动。  原因是人物的RigidBody没有物理材质，导致其产生的摩擦力无限大，造成了卡墙现象  问题解决 给人物设置两个物理材质，一个有摩擦，一个无摩擦。 在人物跳跃时切换无摩擦材质，其他情况切换有摩擦的材质。  12345678910111213&#x2F;&#x2F;物理材质public PhysicsMaterial2D pm_normal; public Phy">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://chordfish-k.github.io/img/post/20230112/01-smil.png">
 <meta property="article:published_time" content="2023-01-12T06:04:20.000Z">
 <meta property="article:modified_time" content="2023-06-08T04:05:14.651Z">
 <meta property="article:author" content="超弦鱼">
 <meta property="article:tag" content="Unity">
-<meta property="article:tag" content="Bug">
 <meta property="article:tag" content="跳跃">
 <meta property="article:tag" content="卡墙">
+<meta property="article:tag" content="Bug">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://chordfish-k.github.io/img/post/20230112/01-smil.png">
   
@@ -227,7 +227,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          389 字
+          369 字
         
       </span>
     
@@ -352,19 +352,13 @@
                 
                 <h2 id="问题描述">问题描述</h2>
 <p>发现人物在跳跃时如果碰到墙壁，会卡住不动。</p>
-<figure>
-<img src="/img/post/20230112/01-smil.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>卡墙</figcaption>
-</figure>
+<p><img src="/img/post/20230112/01-smil.png" srcset="/img/loading.gif" lazyload alt="卡墙"></p>
 <p>原因是人物的RigidBody没有物理材质，导致其产生的摩擦力无限大，造成了卡墙现象</p>
-<figure>
-<img src="/img/post/20230112/02-smil.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>人物的RigidBody2D</figcaption>
-</figure>
+<p><img src="/img/post/20230112/02-smil.png" srcset="/img/loading.gif" lazyload alt="人物的RigidBody2D"></p>
 <h2 id="问题解决">问题解决</h2>
 <p>给人物设置两个物理材质，一个有摩擦，一个无摩擦。</p>
 <p>在人物跳跃时切换无摩擦材质，其他情况切换有摩擦的材质。</p>
-<figure>
-<img src="/img/post/20230112/03-smil.png" srcset="/img/loading.gif" lazyload alt="" /><figcaption>两种材质</figcaption>
-</figure>
+<p><img src="/img/post/20230112/03-smil.png" srcset="/img/loading.gif" lazyload alt="两种材质"></p>
 <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs csharp"><span class="hljs-comment">//物理材质</span><br><span class="hljs-keyword">public</span> PhysicsMaterial2D pm_normal; <br><span class="hljs-keyword">public</span> PhysicsMaterial2D pm_jump; <span class="hljs-comment">//跳跃时切换无摩擦力，防止卡墙</span><br><br><span class="hljs-keyword">private</span> RigidBody2D rig;<br>...<br><span class="hljs-keyword">if</span> (落地条件) &#123;<br>    rig.sharedMaterial = pm_normal;<br>&#125;<br><br><span class="hljs-keyword">if</span> (跳跃条件) &#123;<br>    rig.sharedMaterial = pm_jump;<br>&#125;<br></code></pre></td></tr></table></figure>
 <p>挺取巧的一个办法，就当作是简单的补丁先用着吧。</p>
 
@@ -402,11 +396,11 @@
       
         <a href="/tags/Unity/">#Unity</a>
       
-        <a href="/tags/Bug/">#Bug</a>
-      
         <a href="/tags/%E8%B7%B3%E8%B7%83/">#跳跃</a>
       
         <a href="/tags/%E5%8D%A1%E5%A2%99/">#卡墙</a>
+      
+        <a href="/tags/Bug/">#Bug</a>
       
     </div>
   

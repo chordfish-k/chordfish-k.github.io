@@ -16,12 +16,12 @@
   <meta name="author" content="超弦鱼">
   <meta name="keywords" content="超弦鱼">
   
-    <meta name="description" content="使用 glfwSetDropCallback 的过程中遇到了中文乱码问题，需要将const char*转换为中文路径 可以使用 C++ 标准库的 std::filesystem，它支持 UTF-8 编码，允许跨平台处理带有中文字符的文件路径。这种方法不依赖特定平台 API，能够在多平台上正常处理中文字符。 以下是使用 std::filesystem::path 处理 GLFW 中文路径的示例代">
+    <meta name="description" content="使用 glfwSetDropCallback 的过程中遇到了中文乱码问题，需要将const char*转换为中文路径 可以使用 C++ 标准库的 std::filesystem，它支持 UTF-8 编码，允许跨平台处理带有中文字符的文件路径。这种方法不依赖特定平台 API，能够在多平台上正常处理中文字符。 以下是使用 std::filesystem::path 处理 GLFW 中文路径的示例代码：">
 <meta property="og:type" content="article">
 <meta property="og:title" content="c++17将const char*处理为中文路径的方法">
 <meta property="og:url" content="https://chordfish-k.github.io/2024/10/31/cpp/cpp-20241031/index.html">
 <meta property="og:site_name" content="~超弦鱼🐟~">
-<meta property="og:description" content="使用 glfwSetDropCallback 的过程中遇到了中文乱码问题，需要将const char*转换为中文路径 可以使用 C++ 标准库的 std::filesystem，它支持 UTF-8 编码，允许跨平台处理带有中文字符的文件路径。这种方法不依赖特定平台 API，能够在多平台上正常处理中文字符。 以下是使用 std::filesystem::path 处理 GLFW 中文路径的示例代">
+<meta property="og:description" content="使用 glfwSetDropCallback 的过程中遇到了中文乱码问题，需要将const char*转换为中文路径 可以使用 C++ 标准库的 std::filesystem，它支持 UTF-8 编码，允许跨平台处理带有中文字符的文件路径。这种方法不依赖特定平台 API，能够在多平台上正常处理中文字符。 以下是使用 std::filesystem::path 处理 GLFW 中文路径的示例代码：">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-10-31T05:50:21.000Z">
 <meta property="article:modified_time" content="2024-10-31T05:55:40.717Z">

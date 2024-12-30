@@ -16,12 +16,12 @@
   <meta name="author" content="超弦鱼">
   <meta name="keywords" content="超弦鱼">
   
-    <meta name="description" content="一、变量 1.定义方法 在Kotlin中，我们使用关键字val或var来声明一个变(常)量。 val: 声明一个常量，相当于java中的final变量，无法二次赋值 var: 声明一个变量  用例： 12val a &#x3D; 114var b &#x3D; 5.14 Kotlin具备优秀的类型推导能力，它会将a的类型推导为Int，并将b的类型推导为Double。 2.变量类型 例： 12val a : Int &#x3D;">
+    <meta name="description" content="一、变量 1.定义方法 在Kotlin中，我们使用关键字val或var来声明一个变(常)量。 val: 声明一个常量，相当于java中的final变量，无法二次赋值 var: 声明一个变量 用例： 12val a &#x3D; 114var b &#x3D; 5.14 Kotlin具备优秀的类型推导能力，它会将a的类型推导为Int，并将b的类型推导为Double。 2.变量类型 例： 12val">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【Kotlin】学习笔记（一）变量、函数与逻辑控制">
 <meta property="og:url" content="https://chordfish-k.github.io/2023/02/01/kotlin/kotlin-20230201/index.html">
 <meta property="og:site_name" content="~超弦鱼🐟~">
-<meta property="og:description" content="一、变量 1.定义方法 在Kotlin中，我们使用关键字val或var来声明一个变(常)量。 val: 声明一个常量，相当于java中的final变量，无法二次赋值 var: 声明一个变量  用例： 12val a &#x3D; 114var b &#x3D; 5.14 Kotlin具备优秀的类型推导能力，它会将a的类型推导为Int，并将b的类型推导为Double。 2.变量类型 例： 12val a : Int &#x3D;">
+<meta property="og:description" content="一、变量 1.定义方法 在Kotlin中，我们使用关键字val或var来声明一个变(常)量。 val: 声明一个常量，相当于java中的final变量，无法二次赋值 var: 声明一个变量 用例： 12val a &#x3D; 114var b &#x3D; 5.14 Kotlin具备优秀的类型推导能力，它会将a的类型推导为Int，并将b的类型推导为Double。 2.变量类型 例： 12val">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://chordfish-k.github.io/img/kotlin.jpg">
 <meta property="article:published_time" content="2023-02-01T04:38:55.000Z">
@@ -228,7 +228,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.2k 字
+          2.3k 字
         
       </span>
     
@@ -387,99 +387,47 @@
             
               <div class="markdown-body">
                 
-                <h2 id="一、变量">一、变量</h2>
-<h3 id="1-定义方法">1.定义方法</h3>
+                <h2 id="一变量">一、变量</h2>
+<h3 id="定义方法">1.定义方法</h3>
 <p>在Kotlin中，我们使用关键字<code>val</code>或<code>var</code>来声明一个变(常)量。</p>
 <pre><code class="hljs">val: 声明一个常量，相当于java中的final变量，无法二次赋值
-var: 声明一个变量
-</code></pre>
+var: 声明一个变量</code></pre>
 <p>用例：</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-keyword">val</span> a = <span class="hljs-number">114</span><br><span class="hljs-keyword">var</span> b = <span class="hljs-number">5.14</span><br></code></pre></td></tr></table></figure>
 <p>Kotlin具备优秀的类型推导能力，它会将a的类型推导为Int，并将b的类型推导为Double。</p>
-<h3 id="2-变量类型">2.变量类型</h3>
+<h3 id="变量类型">2.变量类型</h3>
 <p>例：</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-keyword">val</span> a : <span class="hljs-built_in">Int</span> = <span class="hljs-number">114514</span> <span class="hljs-comment">//正确</span><br><span class="hljs-keyword">val</span> b : <span class="hljs-built_in">Int</span> = <span class="hljs-number">1919.810</span> <span class="hljs-comment">//报错</span><br></code></pre></td></tr></table></figure>
-<p>Kotlin部分的对象数据类型如下：</p>
-<table>
-<thead>
-<tr>
-<th>类型对象</th>
-<th>名称</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Int</td>
-<td>整形</td>
-</tr>
-<tr>
-<td>Long</td>
-<td>长整型</td>
-</tr>
-<tr>
-<td>Short</td>
-<td>短整型</td>
-</tr>
-<tr>
-<td>Float</td>
-<td>单精度浮点型</td>
-</tr>
-<tr>
-<td>Double</td>
-<td>双精度浮点型</td>
-</tr>
-<tr>
-<td>Boolean</td>
-<td>布尔型</td>
-</tr>
-<tr>
-<td>Char</td>
-<td>字符型</td>
-</tr>
-<tr>
-<td>Byte</td>
-<td>字节型</td>
-</tr>
-<tr>
-<td>Number</td>
-<td>数值型</td>
-</tr>
-<tr>
-<td>String</td>
-<td>字符串型</td>
-</tr>
-</tbody>
-</table>
-<h2 id="二、函数">二、函数</h2>
-<h3 id="1-基本定义">1.基本定义</h3>
+<p>Kotlin部分的对象数据类型如下： |类型对象|名称| |----|----| |Int|整形| |Long|长整型| |Short|短整型| |Float|单精度浮点型| |Double|双精度浮点型| |Boolean|布尔型| |Char|字符型| |Byte|字节型| |Number|数值型| |String|字符串型|</p>
+<h2 id="二函数">二、函数</h2>
+<h3 id="基本定义">1.基本定义</h3>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-function"><span class="hljs-keyword">fun</span> 函数名<span class="hljs-params">(参数a: 类型<span class="hljs-type">a</span>，参数<span class="hljs-type">b</span>: 类型<span class="hljs-type">b</span>)</span></span>: 返回值类型 &#123;<br>    <span class="hljs-keyword">return</span> ...<br>&#125;<br></code></pre></td></tr></table></figure>
 <p>特别地，当函数中只有一行代码时，可以不写花括号 <code>&#123;&#125;</code>，而使用 <code>=</code> 进行简化。如：</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">largeNumber</span><span class="hljs-params">(num1: <span class="hljs-type">Int</span>, num2: <span class="hljs-type">Int</span>)</span></span>: <span class="hljs-built_in">Int</span> = max(num1, num2)<br></code></pre></td></tr></table></figure>
 <p>在这种写法下，还能省去返回值类型的声明：</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">largeNumber</span><span class="hljs-params">(num1: <span class="hljs-type">Int</span>, num2: <span class="hljs-type">Int</span>)</span></span> = max(num1, num2)<br></code></pre></td></tr></table></figure>
 <p>另外，函数中声明的参数默认是可变的，如果想让它不可更改，可以在前面添加关键字<code>val</code></p>
-<h2 id="三、逻辑控制">三、逻辑控制</h2>
-<h3 id="1-if语句">1.if语句</h3>
+<h2 id="三逻辑控制">三、逻辑控制</h2>
+<h3 id="if语句">1.if语句</h3>
 <p>和大部分语言中的<code>if</code>基本没有区别</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-keyword">var</span> a = <span class="hljs-number">5</span><br><span class="hljs-keyword">var</span> b = <span class="hljs-number">4</span><br><span class="hljs-keyword">if</span> (a &gt; b) &#123;<br>    a = b<br>&#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (b &gt; a)&#123;<br>    b = a<br>&#125; <span class="hljs-keyword">else</span> &#123;<br>    a = <span class="hljs-number">9</span><br>    b = <span class="hljs-number">9</span><br>&#125;<br></code></pre></td></tr></table></figure>
 <p>但在Kotlin中，<code>if</code>语句还有别的功能: 具有返回值</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">largerNumber</span><span class="hljs-params">(num1: <span class="hljs-type">Int</span>, num2: <span class="hljs-type">Int</span>)</span></span>: <span class="hljs-built_in">Int</span> &#123;<br>    <span class="hljs-keyword">val</span> value = <span class="hljs-keyword">if</span> (num1 &gt; num2) &#123; num1 &#125; <span class="hljs-keyword">else</span> &#123; num2 &#125;<br>    <span class="hljs-keyword">return</span> value<br>&#125;<br><br><span class="hljs-comment">//继续简化：</span><br><span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">largerNumber</span><span class="hljs-params">(num1: <span class="hljs-type">Int</span>, num2: <span class="hljs-type">Int</span>)</span></span> = <span class="hljs-keyword">if</span> (num1 &gt; num2) &#123;<br>    num1 <br>&#125; <span class="hljs-keyword">else</span> &#123; <br>    num2 <br>&#125;<br><br><span class="hljs-comment">//再简化：</span><br><span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">largerNumber</span><span class="hljs-params">(num1: <span class="hljs-type">Int</span>, num2: <span class="hljs-type">Int</span>)</span></span> = <span class="hljs-keyword">if</span> (num1 &gt; num2) num1 <span class="hljs-keyword">else</span> num2<br><br></code></pre></td></tr></table></figure>
-<h3 id="2-when语句">2.when语句</h3>
+<h3 id="when语句">2.when语句</h3>
 <p><code>when</code>语句类似Java中的<code>switch</code>，但更加完善、简洁</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">getScore</span><span class="hljs-params">(name: <span class="hljs-type">String</span>)</span></span> = <span class="hljs-keyword">when</span>(name) &#123;<br>    <span class="hljs-string">&quot;Tom&quot;</span> -&gt; <span class="hljs-number">86</span><br>    <span class="hljs-string">&quot;Jim&quot;</span> -&gt; <span class="hljs-number">77</span><br>    <span class="hljs-string">&quot;Jack&quot;</span> -&gt; <span class="hljs-number">95</span><br>    <span class="hljs-keyword">else</span> -&gt; &#123;<br>        println(<span class="hljs-string">&quot;Error&quot;</span>)<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 <p>另外，可以不在<code>when</code>中传入参数：</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">getScore</span><span class="hljs-params">(name: <span class="hljs-type">String</span>)</span></span> = <span class="hljs-keyword">when</span> &#123;<br>    name == <span class="hljs-string">&quot;Tom&quot;</span> -&gt; <span class="hljs-number">86</span>  <span class="hljs-comment">//不需要像Java那样使用 .equal() 对字符串进行判断</span><br>    name == <span class="hljs-string">&quot;Jim&quot;</span> -&gt; <span class="hljs-number">77</span><br>    name.startWith(<span class="hljs-string">&quot;Jack&quot;</span>) -&gt; <span class="hljs-number">95</span> <span class="hljs-comment">//箭头的左边可以换成所有带布尔返回值的表达式</span><br>    <span class="hljs-keyword">else</span> -&gt; &#123;<br>        println(<span class="hljs-string">&quot;Error&quot;</span>)<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 <p>when语句还支持类型匹配：</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">checkNumber</span><span class="hljs-params">(num: <span class="hljs-type">Number</span>)</span></span> &#123;<br>    <span class="hljs-keyword">when</span> (num) &#123;<br>        <span class="hljs-keyword">is</span> <span class="hljs-built_in">Int</span> -&gt; println(<span class="hljs-string">&quot;num is Int&quot;</span>)<br>        <span class="hljs-keyword">is</span> <span class="hljs-built_in">Double</span> -&gt; println(<span class="hljs-string">&quot;num is Double&quot;</span>)<br>        <span class="hljs-keyword">else</span> -&gt; println(<span class="hljs-string">&quot;num not support&quot;</span>)<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-<h3 id="3-for循环">3.for循环</h3>
+<h3 id="for循环">3.for循环</h3>
 <p>首先，Kotlin中移除了<code>for-i</code>循环，但加强了<code>for-each</code>循环。还引入了<strong>区间</strong>的概念。</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-keyword">val</span> range1 = <span class="hljs-number">0.</span><span class="hljs-number">.10</span>              <span class="hljs-comment">//表示[0,10]的整数数组，双端闭区间</span><br><span class="hljs-keyword">val</span> range2 = <span class="hljs-number">0</span> until <span class="hljs-number">10</span>         <span class="hljs-comment">//表示[0,10)，左闭右开</span><br><span class="hljs-keyword">val</span> range3 = <span class="hljs-number">0</span> until <span class="hljs-number">10</span> step <span class="hljs-number">2</span>  <span class="hljs-comment">//step关键字，设置递增</span><br></code></pre></td></tr></table></figure>
-<p><code>..</code> 和 <code>until</code>都要符合左端小于等于右端，无法创造递减区间。<br>
-如果要创造一个降序区间，要使用关键字 <code>downTo</code>。</p>
+<p><code>..</code> 和 <code>until</code>都要符合左端小于等于右端，无法创造递减区间。 如果要创造一个降序区间，要使用关键字 <code>downTo</code>。</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-keyword">val</span> range4 = <span class="hljs-number">10</span> downTo <span class="hljs-number">1</span>        <span class="hljs-comment">//[10,1]的降序区间，双端闭区间</span><br></code></pre></td></tr></table></figure>
 <p>有了区间之后，就可以通过<code>for-in</code>循环来遍历这个区间：</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-keyword">for</span> (i <span class="hljs-keyword">in</span> <span class="hljs-number">0.</span><span class="hljs-number">.10</span>) &#123; <span class="hljs-comment">//在for循环中定义的循环变量无需使用var或val关键字</span><br>    println(i)<br>&#125;<br></code></pre></td></tr></table></figure>
-<h3 id="4-while循环">4.while循环</h3>
+<h3 id="while循环">4.while循环</h3>
 <p>Kotlin中的<code>while</code>循环和Java中的没有任何区别：</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span><br><span class="hljs-keyword">while</span> (i &lt; <span class="hljs-number">10</span>) &#123;<br>    i++<br>&#125;<br></code></pre></td></tr></table></figure>
 <p>另外，<code>do-while</code>循环也一样：</p>

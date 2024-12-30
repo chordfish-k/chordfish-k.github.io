@@ -16,12 +16,12 @@
   <meta name="author" content="超弦鱼">
   <meta name="keywords" content="超弦鱼">
   
-    <meta name="description" content="一、类与对象 下面的将示范如何创建一个Kotlin类： 12345678class Person &amp;#123;      &#x2F;&#x2F;类名：Person    var name &#x3D; &quot;&quot;   &#x2F;&#x2F;类成员变量    var age &#x3D; 0    fun show() &amp;#123;    &#x2F;&#x2F;类成员函数        println(name + &quot;，&quot; + age +">
+    <meta name="description" content="一、类与对象 下面的将示范如何创建一个Kotlin类： 12345678class Person &amp;#123;      &#x2F;&#x2F;类名：Person    var name &#x3D; &quot;&quot;   &#x2F;&#x2F;类成员变量    var age &#x3D; 0    fun show() &amp;#123;    &#x2F;&#x2F;类成员函数        println(name + &quot;，&quot; + age">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【Kotlin】学习笔记（二）面向对象编程">
 <meta property="og:url" content="https://chordfish-k.github.io/2023/02/02/kotlin/kotlin-20230202/index.html">
 <meta property="og:site_name" content="~超弦鱼🐟~">
-<meta property="og:description" content="一、类与对象 下面的将示范如何创建一个Kotlin类： 12345678class Person &amp;#123;      &#x2F;&#x2F;类名：Person    var name &#x3D; &quot;&quot;   &#x2F;&#x2F;类成员变量    var age &#x3D; 0    fun show() &amp;#123;    &#x2F;&#x2F;类成员函数        println(name + &quot;，&quot; + age +">
+<meta property="og:description" content="一、类与对象 下面的将示范如何创建一个Kotlin类： 12345678class Person &amp;#123;      &#x2F;&#x2F;类名：Person    var name &#x3D; &quot;&quot;   &#x2F;&#x2F;类成员变量    var age &#x3D; 0    fun show() &amp;#123;    &#x2F;&#x2F;类成员函数        println(name + &quot;，&quot; + age">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://chordfish-k.github.io/img/kotlin.jpg">
 <meta property="article:published_time" content="2023-02-02T04:38:55.000Z">
@@ -385,90 +385,86 @@
             
               <div class="markdown-body">
                 
-                <h2 id="一、类与对象">一、类与对象</h2>
+                <h2 id="一类与对象">一、类与对象</h2>
 <p>下面的将示范如何创建一个Kotlin类：</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Person</span> &#123;      <span class="hljs-comment">//类名：Person</span><br>    <span class="hljs-keyword">var</span> name = <span class="hljs-string">&quot;&quot;</span>   <span class="hljs-comment">//类成员变量</span><br>    <span class="hljs-keyword">var</span> age = <span class="hljs-number">0</span><br><br>    <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">show</span><span class="hljs-params">()</span></span> &#123;    <span class="hljs-comment">//类成员函数</span><br>        println(name + <span class="hljs-string">&quot;，&quot;</span> + age + <span class="hljs-string">&quot;岁&quot;</span>)<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 <p>然后将这个类进行<strong>实例化</strong>，获得一个<strong>对象</strong></p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>    <span class="hljs-keyword">val</span> p = Person() <span class="hljs-comment">//跟Java相比，去掉了new关键字</span><br>    p.name = <span class="hljs-string">&quot;田所浩二&quot;</span><br>    p.age = <span class="hljs-number">24</span><br>    p.show()<br>&#125;<br></code></pre></td></tr></table></figure>
-<h2 id="二、类的继承与构造函数">二、类的继承与构造函数</h2>
+<h2 id="二类的继承与构造函数">二、类的继承与构造函数</h2>
 <p>首先，在Kotlin中，所有非抽象类默认都是不可继承的，就像Java中的<code>final</code>声明的类，要使得类能悲继承，需要<code>open</code>关键字。</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-keyword">open</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Person</span> &#123;      <span class="hljs-comment">//类名：Person</span><br>    ...<br>&#125;<br></code></pre></td></tr></table></figure>
 <p>然后我们让<code>Student</code>类继承<code>Person</code>类，使用一个冒号，注意被继承类名后面的括号：</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Student</span> : <span class="hljs-type">Person</span>() &#123;<br>    <span class="hljs-keyword">var</span> id = <span class="hljs-string">&quot;&quot;</span><br>    <span class="hljs-keyword">var</span> grade = <span class="hljs-number">0</span><br>&#125;<br></code></pre></td></tr></table></figure>
 <p>另外是关于构造函数的部分。Kotlin将构造函数分成了两种：<strong>主构造函数</strong>和<strong>次构造函数</strong>。</p>
-<h3 id="1-主构造函数">1.主构造函数</h3>
+<h3 id="主构造函数">1.主构造函数</h3>
 <p><strong>主构造函数</strong>是每个类默认都会有的一个不带参数的构造函数，我们也可以给它指定参数。主构造函数没有函数体，直接定义在类名后面：</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Student</span>(<span class="hljs-keyword">val</span> id: String, <span class="hljs-keyword">val</span> grade: <span class="hljs-built_in">Int</span>): Person() &#123;<br>    <span class="hljs-comment">//在主构造函数中声明为val或var的参数会自动成为该类的成员</span><br>&#125;<br><br><span class="hljs-comment">//实例化的时候：传入构造函数的所有参数：</span><br><span class="hljs-keyword">val</span> student = Student(<span class="hljs-string">&quot;1145141919810&quot;</span>, <span class="hljs-number">5</span>)<br></code></pre></td></tr></table></figure>
 <p>主构造函数没有函数体，如果想在其中编写逻辑，可以使用init结构体：</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Student</span>(<span class="hljs-keyword">val</span> id: String, <span class="hljs-keyword">val</span> grade: <span class="hljs-built_in">Int</span>): Person() &#123;<br>    <span class="hljs-keyword">init</span> &#123;<br>        println(<span class="hljs-string">&quot;id is &quot;</span> + id)<br>        println(<span class="hljs-string">&quot;grade is &quot;</span> + grade)<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 <p>根据继承的规定，<strong>子类的构造函数必须调用父类的构造函数</strong>，我们就需要在括号中填入父类构造函数的参数：</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-comment">//将Person类的主构造函数改为：</span><br><span class="hljs-keyword">open</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Person</span>(<span class="hljs-keyword">val</span> name: String, <span class="hljs-keyword">val</span> age: <span class="hljs-built_in">Int</span>) &#123;<br>    ...<br>&#125;<br><br><span class="hljs-comment">//将Student类的继承改为：</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Student</span>(<span class="hljs-keyword">val</span> id: String, <span class="hljs-keyword">val</span> grade: <span class="hljs-built_in">Int</span>, name: String, age: <span class="hljs-built_in">Int</span>): <br>    Person(name, age) &#123; <span class="hljs-comment">//这里的name, age仅作为参数，不生成成员字段，防止父类同名成员的冲突</span><br>    <span class="hljs-keyword">init</span> &#123;<br>        println(<span class="hljs-string">&quot;id is &quot;</span> + id)<br>        println(<span class="hljs-string">&quot;grade is &quot;</span> + grade)<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-<h3 id="2-次构造函数">2.次构造函数</h3>
+<h3 id="次构造函数">2.次构造函数</h3>
 <p>一个类能有多个次构造函数，如下：</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Student</span>(<span class="hljs-keyword">val</span> id: String, <span class="hljs-keyword">val</span> grade: <span class="hljs-built_in">Int</span>, name: String, age: <span class="hljs-built_in">Int</span>): <br>    Person(name, age) <br>&#123; <br>    <br>    <span class="hljs-keyword">constructor</span>(name: String, age: <span class="hljs-built_in">Int</span>): <span class="hljs-keyword">this</span>(<span class="hljs-string">&quot;&quot;</span>, <span class="hljs-number">0</span>, name, age) &#123;<br><br>    &#125;<br><br>    <span class="hljs-keyword">constructor</span>(): <span class="hljs-keyword">this</span>(<span class="hljs-string">&quot;&quot;</span>, <span class="hljs-number">0</span>) &#123;<br><br>    &#125;<br>&#125;<br><br><span class="hljs-keyword">val</span> st1 = Student()<br><span class="hljs-keyword">val</span> st2 = Student(<span class="hljs-string">&quot;我修院卓&quot;</span>, <span class="hljs-number">23</span>)<br><span class="hljs-keyword">val</span> st3 = Student(<span class="hljs-string">&quot;1145141919810&quot;</span>, <span class="hljs-number">5</span>, <span class="hljs-string">&quot;田所浩二&quot;</span>, <span class="hljs-number">24</span>)<br></code></pre></td></tr></table></figure>
 <p>如果类中<strong>没有主构造函数，只有次构造函数</strong>该怎么继承？代码如下：</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Student</span> : <span class="hljs-type">Person</span> &#123; <span class="hljs-comment">//没有主构造，故不用写括号</span><br>    <span class="hljs-comment">//以super关键字直接调用父类构造函数</span><br>    <span class="hljs-keyword">constructor</span>(name: String, age: <span class="hljs-built_in">Int</span>) : <span class="hljs-keyword">super</span>(name, age) &#123;&#125; <br>&#125;<br></code></pre></td></tr></table></figure>
-<h2 id="三、接口">三、接口</h2>
-<p>不同于C++的多继承，Java和Kotlin都是单继承结构的语言，最多只允许继承一个父类，但可以实现任意个<strong>接口</strong><br>
-接口中定义的函数可以不实现，也可以定义默认的实现。Kotlin只会强制要求实现没有默认实现的函数。<br>
-接口定义方法如下：</p>
+<h2 id="三接口">三、接口</h2>
+<p>不同于C++的多继承，Java和Kotlin都是单继承结构的语言，最多只允许继承一个父类，但可以实现任意个<strong>接口</strong> 接口中定义的函数可以不实现，也可以定义默认的实现。Kotlin只会强制要求实现没有默认实现的函数。 接口定义方法如下：</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-keyword">interface</span> <span class="hljs-title class_">Study</span> &#123;<br>    <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">readBooks</span><span class="hljs-params">()</span></span><br>    <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">doHomework</span><span class="hljs-params">()</span></span> &#123;<br>        println(<span class="hljs-string">&quot;doing homework&quot;</span>) <span class="hljs-comment">//默认的实现</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 <p>让<code>Student</code>类实现这个接口, 和继承的写法一样，然后再使用<code>override</code>关键字重载接口定义的函数:</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Student</span>(name: String, age: <span class="hljs-built_in">Int</span>) : Person(name, age), Study &#123; <br>    <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">readBooks</span><span class="hljs-params">()</span></span> &#123;<br>        println(name + <span class="hljs-string">&quot; is reading.&quot;</span>)<br>    &#125;<br>    <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">doHomework</span><span class="hljs-params">()</span></span> &#123;<br>        println(name + <span class="hljs-string">&quot; is doing homework&quot;</span>)<br>    &#125;<br>&#125;<br><br><span class="hljs-comment">//使用这个类:</span><br><span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>    <span class="hljs-keyword">val</span> stu = Student(<span class="hljs-string">&quot;田所浩二&quot;</span>, <span class="hljs-number">24</span>)<br>    doStudy(stu)<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">doStudy</span><span class="hljs-params">(stu: <span class="hljs-type">Study</span>)</span></span> &#123; <br>    <span class="hljs-comment">//只有继承了Study接口的类的对象才能使用该函数</span><br>    stu.readBooks()<br>    stu.doHomework()<br>&#125;<br></code></pre></td></tr></table></figure>
-<h2 id="四、可见性修饰符">四、可见性修饰符</h2>
+<h2 id="四可见性修饰符">四、可见性修饰符</h2>
 <p>Java中有四种修饰符：<code>public</code>、<code>private</code>、<code>protected</code>、<code>default</code>，默认是<code>default</code>。</p>
 <p>Kotlin也有四种：<code>public</code>、<code>private</code>、<code>protected</code>、<code>internal</code>， 默认是<code>public</code>。</p>
 <table>
 <thead>
-<tr>
+<tr class="header">
 <th>修饰符</th>
 <th>Java</th>
 <th>Kotlin</th>
 </tr>
 </thead>
 <tbody>
-<tr>
+<tr class="odd">
 <td>public</td>
 <td>所有类可见</td>
 <td>所有类可见(默认)</td>
 </tr>
-<tr>
+<tr class="even">
 <td>private</td>
 <td>当前类可见</td>
 <td>当前类可见</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>protected</td>
 <td>当前类、子类、同一煲路径下的类可见</td>
 <td>当前类，子类可见</td>
 </tr>
-<tr>
+<tr class="even">
 <td>default</td>
 <td>同一包路径下的类可见(默认)</td>
 <td>无</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>internal</td>
 <td>无</td>
 <td>同一模块中的类可见</td>
 </tr>
 </tbody>
 </table>
-<h2 id="五、数据类">五、数据类</h2>
+<h2 id="五数据类">五、数据类</h2>
 <p>在一个规范的系统架构中，<strong>数据类</strong>用于将服务器端或数据库中的数据映射到内存中，为编程逻辑提供数据模型的支持。</p>
 <p>在Java中数据类通常需要重写<code>equals()</code>、<code>hashCode()</code>、<code>toString()</code>这几个方法，而Kotlin则只需要一个<code>data</code>关键字，这些方法便会自动生成：</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-keyword">data</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Cellphone</span>(<span class="hljs-keyword">val</span> brand: String, <span class="hljs-keyword">val</span> price: <span class="hljs-built_in">Double</span>)<br></code></pre></td></tr></table></figure>
-<p>当一个类内部没有任何代码，便可以将大括号省略。<br>
-下面测试一下这个数据类：</p>
+<p>当一个类内部没有任何代码，便可以将大括号省略。 下面测试一下这个数据类：</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>    <span class="hljs-keyword">val</span> cellphone1 = Cellphone(<span class="hljs-string">&quot;Samsung&quot;</span>, <span class="hljs-number">1299.99</span>)<br>    <span class="hljs-keyword">val</span> cellphone2 = Cellphone(<span class="hljs-string">&quot;Samsung&quot;</span>, <span class="hljs-number">1299.99</span>)<br>    println(cellphone1)<br>    println(<span class="hljs-string">&quot;cellphone1 == cellphone2 ? &quot;</span> + (cellphone1 == cellphone2))<br>&#125;<br></code></pre></td></tr></table></figure>
 <p>运行结果如下：</p>
 <pre><code class="hljs">Cellphone(brand=Samsung, price=1299.99)
-cellphone1 == cellphone2 ? true
-</code></pre>
-<h2 id="六、单例类">六、单例类</h2>
+cellphone1 == cellphone2 ? true</code></pre>
+<h2 id="六单例类">六、单例类</h2>
 <p>使用单例可以避免创建重复的对象，保证一个类最多拥有一个实例。</p>
 <p>在<strong>Java</strong>中创建单例类需要以下几个步骤：</p>
-<ol>
+<ol type="1">
 <li>将类的<strong>构造函数私有化</strong></li>
 <li>向外部提供一个<code>getInstance()</code>的<strong>静态方法</strong>用于获取该类实例</li>
 <li>在<code>getInstance()</code>中，判断如果当前缓存的实例为<code>null</code>，就创建一个新的实例并将其缓存，否则直接返回缓存的实例即可。</li>

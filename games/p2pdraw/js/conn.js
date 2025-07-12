@@ -2,11 +2,8 @@ class Connection {
   constructor() {
     this.peer = new Peer({
       config: {
-        iceServers: [
-          { url: "stun:stun.l.google.com:19302" }, // 谷歌公共STUN服务器
-          { url: "turn:homeo@turn.bistri.com:80", credential: "homeo" },
-        ],
-      },
+        iceServers: [{ url: "stun:stun.l.google.com:19302" }],
+      } /* Sample servers, please use appropriate ones */,
     });
     this.conn = null;
     this.onGetPeerIdSucceed = null;

@@ -1,6 +1,12 @@
 class Connection {
   constructor() {
-    this.peer = new Peer();
+    this.peer = new Peer({
+      config: {
+        iceServers: [
+          { urls: "stun:stun.l.google.com:19302" }, // 谷歌公共STUN服务器
+        ],
+      },
+    });
     this.conn = null;
     this.onGetPeerIdSucceed = null;
     this.onGetPeerIdError = null;

@@ -2,7 +2,14 @@ class Connection {
   constructor() {
     this.peer = new Peer({
       config: {
-        iceServers: [{ url: "stun:stun.l.google.com:19302" }],
+        iceServers: [
+          { urls: "stun:stun.l.google.com:19302" },
+          { 
+            urls: "turn:openrelay.metered.ca:80",
+            username: "openrelayproject",
+            credential: "openrelayproject"
+          }
+        ],
       } /* Sample servers, please use appropriate ones */,
     });
     this.conn = null;

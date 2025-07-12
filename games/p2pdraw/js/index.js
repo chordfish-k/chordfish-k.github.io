@@ -130,6 +130,16 @@ function endDraw(drawStatus) {
 }
 
 // 添加画板功能
+// 添加获取触摸坐标的辅助函数
+function getTouchPos(canvas, touchEvent) {
+  const rect = canvas.getBoundingClientRect();
+  return {
+    x: touchEvent.touches[0].clientX - rect.left,
+    y: touchEvent.touches[0].clientY - rect.top
+  };
+}
+
+// 修改initCanvas函数，添加触摸事件处理
 function initCanvas() {
   // 设置canvas尺寸以匹配显示大小
   function resizeCanvas() {
@@ -148,38 +158,68 @@ function initCanvas() {
   // 鼠标按下时开始绘制
   canvas.addEventListener("mousedown", (e) => {
     beginDraw(hostDrawStatus, e.offsetX, e.offsetY);
-    connection.send({
-      type: "begin_draw",
-      x: e.offsetX,
-      y: e.offsetY,
-    });
+    connection.send({ type: "begin_draw", x: e.offsetX, y: e.offsetY });
   });
 
-  // 鼠标移动时绘制
   canvas.addEventListener("mousemove", (e) => {
     draw(hostDrawStatus, e.offsetX, e.offsetY);
-
-    connection.send({
-      type: "draw",
-      x: e.offsetX,
-      y: e.offsetY,
-    });
+    connection.send({ type: "draw", x: e.offsetX, y: e.offsetY });
   });
 
-  // 鼠标释放或离开时停止绘制
   canvas.addEventListener("mouseup", () => {
     endDraw(hostDrawStatus);
-    connection.send({
-      type: "end_draw",
-    });
+    connection.send({ type: "end_draw" });
   });
   canvas.addEventListener("mouseout", () => {
     endDraw(hostDrawStatus);
-    connection.send({
-      type: "end_draw",
-    });
+    connection.send({ type: "end_draw" });
+  });
+
+  // 添加触摸事件处理
+  canvas.addEventListener("touchstart", (e) => {
+    e.preventDefault(); // 阻止默认触摸行为
+    const pos = getTouchPos(canvas, e);
+    beginDraw(hostDrawStatus, pos.x, pos.y);
+    connection.send({ type: "begin_draw", x: pos.x, y: pos.y });
+  });
+
+  canvas.addEventListener("touchmove", (e) => {
+    e.preventDefault(); // 阻止页面滚动
+    const pos = getTouchPos(canvas, e);
+    draw(hostDrawStatus, pos.x, pos.y);
+    connection.send({ type: "draw", x: pos.x, y: pos.y });
+  });
+
+  canvas.addEventListener("touchend", (e) => {
+    e.preventDefault();
+    endDraw(hostDrawStatus);
+    connection.send({ type: "end_draw" });
+  });
+
+  canvas.addEventListener("touchcancel", (e) => {
+    e.preventDefault();
+    endDraw(hostDrawStatus);
+    connection.send({ type: "end_draw" });
+  });
+
+  // 添加窗口大小变化防抖处理
+  let resizeTimeout;
+  window.addEventListener("resize", () => {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+      resizeCanvas();
+      // 可选：重新绘制内容或发送画布状态
+    }, 100); // 延迟100ms执行，避免频繁触发
   });
 }
+
+// 添加输入法弹出时的处理
+window.addEventListener('resize', () => {
+  // 当窗口高度变化超过100px时认为是输入法弹出
+  if (Math.abs(window.innerHeight - window.visualViewport.height) > 100) {
+    resizeCanvas();
+  }
+});
 
 function handleOnMessage(data) {
   if (data.type == "begin_draw") {

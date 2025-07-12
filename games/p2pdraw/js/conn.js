@@ -3,7 +3,8 @@ class Connection {
     this.peer = new Peer({
       config: {
         iceServers: [
-          { urls: "stun:stun.l.google.com:19302" }, // 谷歌公共STUN服务器
+          { url: "stun:stun.l.google.com:19302" }, // 谷歌公共STUN服务器
+          { url: "turn:homeo@turn.bistri.com:80", credential: "homeo" },
         ],
       },
     });

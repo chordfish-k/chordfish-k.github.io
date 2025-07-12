@@ -1,0 +1,50 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body,
+html {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  background: #f0f0f0;
+}
+
+.container {
+  height: 100vh;
+  /* 占满浏览器高度 */
+  aspect-ratio: 9/16;
+  /* 竖屏手机典型比例 */
+  max-width: 100vw;
+  /* 防止超出屏幕 */
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  background: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.control-row {
+  width: 100%;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+#peerId {
+  min-width: 120px;
+}
+
+#otherPeerId {
+  flex-grow: 1;
+  padding: 4px;
+}
+
+#canvas {
+  flex-grow: 1;
+  width: 100%;
+  border: 1px solid #ccc;
+}

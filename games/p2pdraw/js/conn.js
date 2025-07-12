@@ -1,14 +1,18 @@
 class Connection {
   constructor() {
     this.peer = new Peer({
+      host: "peerjs-server.herokuapp.com",
+      port: 443,
+      path: "/",
+      secure: true,
       config: {
         iceServers: [
           { urls: "stun:stun.l.google.com:19302" },
-          { 
+          {
             urls: "turn:openrelay.metered.ca:80",
             username: "openrelayproject",
-            credential: "openrelayproject"
-          }
+            credential: "openrelayproject",
+          },
         ],
       } /* Sample servers, please use appropriate ones */,
     });

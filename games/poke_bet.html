@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>Demo</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        touch-action: none;
+        font-size: 14px;
+        /* 禁止触摸操作的默认行为 */
+      }
+
+      body,
+      html {
+        height: 100%;
+        overflow: hidden;
+        /* 防止页面滚动 */
+        display: flex;
+        justify-content: center;
+        background: #f0f0f0;
+        position: fixed;
+        /* 固定视口位置 */
+        width: 100%;
+      }
+
+      .container {
+        height: 100vh;
+        aspect-ratio: 9/16;
+        max-width: 100vw;
+        display: flex;
+        flex-direction: column;
+        padding: 10px;
+        background: white;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        position: relative;
+      }
+
+      .control-row {
+        width: 100%;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      #canvas {
+        flex-grow: 1;
+        width: 100%;
+        border: 1px solid #ccc;
+      }
+
+      .toolbar {
+        top: 0;
+        left: 0;
+        width: 100%;
+        padding-top: 3px;
+        padding-bottom: 2px;
+        background-color: #333;
+        /*应该为分散布局*/
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+      }
+
+      .toolbar input {
+        font-size: smaller;
+        padding: 2px;
+        height: 100%;
+      }
+
+      .toolbar button {
+        padding: 6px 12px;
+        border: none;
+        border-radius: 4px;
+        background-color: #555;
+        color: white;
+        cursor: pointer;
+        font-size: 12px;
+        transition: all 0.2s;
+      }
+
+      .toolbar button:hover {
+        background-color: #777;
+      }
+
+      .toolbar button.active {
+        background-color: #007bff;
+        transform: scale(1.05);
+      }
+
+      .toolbar button:active {
+        transform: scale(0.98);
+      }
+
+      #gameStatus {
+        color: #ccc;
+        margin-right: 4px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="toolbar">
+        <span id="gameStatus">未连接</span>
+        <input type="text" id="otherId" placeholder="请输入对方ID" />
+        <button id="matchBtn">匹配</button>
+        <button id="copyIdBtn">获取的ID</button>
+        <button id="replayBtn" style="display: none">重玩</button>
+      </div>
+      <canvas id="canvas"></canvas>
+    </div>
+
+    <script type="text/javascript">
+      // const ws = new WebSocket("ws://localhost:3000/myapp");
+      const ws = new WebSocket("ws://chordfish.site:3000/myapp");
+
+      // 枚举定义游戏状态，未连接,未匹配，已准备，游戏中
+      const GameStatus = {
+        NOT_CONNECTED: 0,
+        NOT_MATCHED: 1,
+        READY: 2,
+        IN_GAME: 3,
+        END_GAME: 4,
+      };
+
+      const CardSuit = {
+        SPADE: "♠",
+        HEART: "♥",
+        DIAMOND: "♦",
+        CLUB: "♣",
+      };
+
+      const newButton = (x, y, w, h, text, onclick) => {
+        return {
+          x,
+          y,
+          w,
+          h,
+          text,
+          onclick,
+        };
+      };
+
+      const newGame = (ctx) => {
+        const cardSize = {
+          w: 60,
+          h: 80,
+        };
+        const cardGap = {
+          x: 10,
+          y: 10,
+        };
+        const btnSize = {
+          w: 50,
+          h: 50,
+        };
+        const btnGap = {
+          x: 10,
+          y: 10,
+        };
+        const playerCardMaxCount = 2;
+        const middleCardMaxCount = 5;
+
+        return {
+          ws: null,
+          myId: "",
+          gameStatus: GameStatus.NOT_CONNECTED,
+          isHost: false,
+          allowBet: false,
+          oldScore: 0,
+          buttonList: [],
+
+          data: {},
+
+          isMyTurn: function () {
+            return this.allowBet;
+          },
+
+          initGame: function () {
+            this.initButtons();
+            return this;
+          },
+
+          initButtons: function () {
+            const btnYBaseline =
+              ctx.canvas.height - btnSize.h - btnGap.y - (btnSize.h + btnGap.y);
+            const _addBtn = (x, y, val) => {
+              const text = (val >= 0 ? "+" : "") + val;
+              this.addButton(x, y, btnSize.h, btnSize.h, text, () => {
+                this.onBetBtnClicked(val);
+              });
+            };
+            // 0
+            _addBtn(btnGap.x * 2, btnYBaseline, 0);
+
+            // +1 +2 +4 +8
+            const yUp = btnYBaseline - (btnSize.h / 2 + btnGap.y);
+            _addBtn(btnGap.x * 4 + btnSize.w + btnGap.x, yUp, 1);
+            _addBtn(btnGap.x * 4 + btnSize.w * 2 + btnGap.x * 2, yUp, 2);
+            _addBtn(btnGap.x * 4 + btnSize.w * 3 + btnGap.x * 3, yUp, 4);
+            _addBtn(btnGap.x * 4 + btnSize.w * 4 + btnGap.x * 4, yUp, 8);
+
+            // -1 -2 -4 -8
+            const yDown = btnYBaseline + (btnSize.h / 2 + btnGap.y);
+            _addBtn(btnGap.x * 4 + btnSize.w + btnGap.x, yDown, -1);
+            _addBtn(btnGap.x * 4 + btnSize.w * 2 + btnGap.x * 2, yDown, -2);
+            _addBtn(btnGap.x * 4 + btnSize.w * 3 + btnGap.x * 3, yDown, -4);
+            _addBtn(btnGap.x * 4 + btnSize.w * 4 + btnGap.x * 4, yDown, -8);
+          },
+
+          addCard: function (cardType, card) {
+            switch (cardType) {
+              case CardType.HOST:
+                this.data.hostCardList.push(card);
+                break;
+              case CardType.MIDDLE:
+                this.data.middleCardList.push(card);
+                break;
+              case CardType.GUEST:
+                this.data.guestCardList.push(card);
+                break;
+            }
+            return card;
+          },
+
+          addButton: function (x, y, w, h, text, onclick) {
+            this.buttonList.push(newButton(x, y, w, h, text, onclick));
+          },
+
+          drawCard: function (x, y, card) {
+            // 绘制扑克牌，不用图片
+            ctx.beginPath();
+            ctx.rect(x, y, cardSize.w, cardSize.h); // 使用传入的坐标，调整尺寸更符合扑克牌比例
+            ctx.fillStyle = "#FFFFFF";
+            ctx.fill();
+            ctx.strokeStyle = "#000000";
+            ctx.lineWidth = 2;
+            ctx.stroke();
+
+            if (card && !card.back) {
+              ctx.font = "30px Arial";
+              ctx.fillStyle = "#000000";
+              ctx.textAlign = "center";
+              ctx.textBaseline = "middle";
+
+              // 绘制数值
+              // 根据花色设置颜色
+              const color =
+                card.suit === CardSuit.HEART || card.suit === CardSuit.DIAMOND
+                  ? "#FF0000"
+                  : "#000000";
+              ctx.fillStyle = color;
+              ctx.fillText(
+                `${card.value}`,
+                x + cardSize.w / 2,
+                y + cardSize.h / 2
+              );
+              // 设置文字样式
+              ctx.font = "16px Arial";
+              ctx.textAlign = "left";
+              ctx.textBaseline = "top";
+
+              // 绘制花色
+              ctx.fillText(`${card.suit}`, x + 5, y + 5);
+
+              // 在右下角绘制花色
+              ctx.textAlign = "right";
+              ctx.textBaseline = "bottom";
+              ctx.fillText(
+                `${card.suit}`,
+                x + cardSize.w - 5,
+                y + cardSize.h - 5
+              );
+            } else {
+              ctx.font = "30px Arial";
+              ctx.fillStyle = "#000000";
+              ctx.textAlign = "center";
+              ctx.textBaseline = "middle";
+              // 牌背，绘制问号
+              ctx.fillStyle = "#000000";
+              ctx.fillText("?", x + cardSize.w / 2, y + cardSize.h / 2);
+            }
+            ctx.closePath();
+          },
+
+          drawButton: function (button) {
+            // 绘制一个正方形按钮，在上面绘制文字
+            ctx.beginPath();
+            ctx.rect(button.x, button.y, button.w, button.h);
+            ctx.fillStyle = "#FFFFFF";
+            ctx.fill();
+            ctx.strokeStyle = "#000000";
+            ctx.lineWidth = 2;
+            ctx.stroke();
+
+            if (!this.isMyTurn()) {
+              // 绘制对角线交叉
+              ctx.beginPath();
+              ctx.moveTo(button.x, button.y);
+              ctx.lineTo(button.x + button.w, button.y + button.h);
+              ctx.moveTo(button.x + button.w, button.y);
+              ctx.lineTo(button.x, button.y + button.h);
+              ctx.strokeStyle = "#FF0000";
+              ctx.lineWidth = 2;
+              ctx.stroke();
+            }
+
+            // 设置文字样式
+            ctx.font = "16px Arial";
+            ctx.textAlign = "center";
+            ctx.textBaseline = "middle";
+            ctx.fillStyle = "#000000";
+            ctx.fillText(
+              button.text,
+              button.x + button.w / 2,
+              button.y + button.h / 2
+            );
+
+            ctx.closePath();
+          },
+
+          drawCardList: function (y, list, maxCount) {
+            // 绘制所有牌
+            const cardListSize = maxCount;
+            var curCardX =
+              (ctx.canvas.width -
+                (cardListSize * cardSize.w + (cardListSize - 1) * cardGap.x)) /
+              2;
+            const curCardY = y;
+            for (var i = 0; i < maxCount; i++) {
+              this.drawCard(
+                curCardX,
+                curCardY,
+                i < list.length ? list[i] : null
+              );
+              curCardX += cardSize.w + cardGap.x;
+            }
+          },
+
+          drawStatus: function () {
+            // 顶部填充一个绿色横条
+            ctx.beginPath();
+            ctx.rect(0, 0, ctx.canvas.width, 40);
+            ctx.fillStyle = "#008800";
+            ctx.strokeStyle = "#008800";
+            ctx.lineWidth = 2;
+            ctx.fill();
+            ctx.stroke();
+
+            ctx.font = "18px Arial";
+            ctx.textAlign = "center";
+            ctx.textBaseline = "middle";
+            ctx.strokeStyle = "#FFFFFF";
+            ctx.fillStyle = "#FFFFFF";
+            ctx.lineWidth = 1;
+            ctx.fillText(`分数: ${this.data.score}`, ctx.canvas.width / 4, 20);
+            ctx.fillText(
+              `下注: ${this.data.bet}`,
+              (ctx.canvas.width / 4) * 3,
+              20
+            );
+            ctx.closePath();
+          },
+
+          drawGameResult: function () {
+            ctx.font = "26px Arial";
+            ctx.textAlign = "center";
+            ctx.textBaseline = "middle";
+            ctx.fillStyle = "#333333";
+            ctx.lineWidth = 1;
+
+            ctx.beginPath();
+            const myResultY = 330;
+            const otherResultY = 150;
+            ctx.fillText(
+              this.data.result.type,
+              ctx.canvas.width / 6,
+              myResultY
+            );
+            ctx.fillText(
+              this.data.result.compare,
+              (ctx.canvas.width / 6) * 5,
+              myResultY
+            );
+
+            ctx.fillText(
+              this.data.result.otherType,
+              ctx.canvas.width / 6,
+              otherResultY
+            );
+            ctx.fillText(
+              this.data.result.otherCompare,
+              (ctx.canvas.width / 6) * 5,
+              otherResultY
+            );
+            ctx.closePath();
+          },
+
+          draw: function () {
+            // 绘制所有元素
+            console.log(this.data);
+            this.buttonList.forEach((button) => {
+              this.drawButton(button);
+            });
+
+            if (!this.isMyTurn()) {
+              // 最下方绘制提示文字
+              ctx.beginPath();
+              ctx.font = "18px Arial";
+              ctx.textAlign = "center";
+              ctx.textBaseline = "middle";
+              ctx.strokeStyle = "#333333";
+              ctx.fillStyle = "#333333";
+              ctx.lineWidth = 1;
+              ctx.fillText(
+                this.gameStatus === GameStatus.IN_GAME
+                  ? `等待对方下注...`
+                  : `等待玩家重开...`,
+                ctx.canvas.width / 2,
+                ctx.canvas.height - 20
+              );
+              ctx.closePath();
+            }
+
+            const centerY = ctx.canvas.height / 2 - cardSize.h / 2;
+            this.drawCardList(
+              centerY - cardSize.h,
+              this.data.middleCardList,
+              middleCardMaxCount
+            );
+
+            this.drawCardList(
+              centerY - cardSize.h * 3,
+              this.data.otherCardList ? this.data.otherCardList : [],
+              playerCardMaxCount
+            );
+            this.drawCardList(
+              centerY + cardSize.h,
+              this.data.cardList,
+              playerCardMaxCount
+            );
+
+            this.drawStatus();
+          },
+
+          drawWithData: function (data) {
+            this.data = data;
+            this.draw();
+          },
+
+          onClick: function (x, y) {
+            if (!this.isMyTurn()) return;
+
+            this.buttonList.forEach((button) => {
+              if (
+                x > button.x &&
+                x < button.x + button.w &&
+                y > button.y &&
+                y < button.y + button.h
+              ) {
+                button.onclick();
+              }
+            });
+          },
+
+          onBetBtnClicked: function (val) {
+            ws.send(
+              JSON.stringify({
+                type: "bet",
+                bet: val,
+              })
+            );
+          },
+        };
+      };
+
+      // 画布设置
+      const canvas = document.getElementById("canvas");
+      const ctx = canvas.getContext("2d");
+      canvas.width = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight;
+
+      const game = newGame(ctx);
+      canvas.addEventListener("click", (event) => {
+        event.preventDefault();
+        // 点击坐标转换为canvas坐标
+        const rect = canvas.getBoundingClientRect();
+        const x = event.clientX - rect.left;
+        const y = event.clientY - rect.top;
+        game.onClick(x, y);
+      });
+
+      ws.onmessage = (event) => {
+        const message = JSON.parse(event.data);
+        console.log("Received message:", message);
+        onWebSocketMsg(message);
+      };
+
+      const onMatchBtnClicked = () => {
+        const otherId = document.getElementById("otherId").value;
+        if (otherId) {
+          console.log("Send Matching with: ", otherId);
+          ws.send(
+            JSON.stringify({
+              type: "match",
+              otherId: otherId,
+            })
+          );
+        }
+      };
+
+      const onCopyBtnClicked = () => {
+        if (game.myId) {
+          navigator.clipboard.writeText(game.myId);
+          console.log("myId copied: ", game.myId);
+          alert("已复制ID");
+        }
+      };
+
+      const onReplayBtnClicked = () => {
+        document.getElementById("replayBtn").style.display = "none";
+        ws.send(
+          JSON.stringify({
+            type: "replay",
+          })
+        );
+      };
+
+      document
+        .getElementById("matchBtn")
+        .addEventListener("click", onMatchBtnClicked);
+      document
+        .getElementById("copyIdBtn")
+        .addEventListener("click", onCopyBtnClicked);
+      document
+        .getElementById("replayBtn")
+        .addEventListener("click", onReplayBtnClicked);
+
+      const showGameStatus = () => {
+        const gameStatusSpan = document.getElementById("gameStatus");
+        switch (game.gameStatus) {
+          case GameStatus.NOT_CONNECTED:
+            gameStatusSpan.innerText = "未连接";
+            break;
+          case GameStatus.NOT_MATCHED:
+            gameStatusSpan.innerText = "未匹配";
+            break;
+          case GameStatus.IN_GAME:
+            gameStatusSpan.innerText = "游戏中";
+            break;
+          case GameStatus.END_GAME:
+            gameStatusSpan.innerText = "结算中";
+            break;
+        }
+      };
+
+      const onWebSocketMsg = (message) => {
+        switch (message.type) {
+          case "connected":
+            if (game.gameStatus === GameStatus.NOT_CONNECTED) {
+              game.gameStatus = GameStatus.NOT_MATCHED;
+              game.myId = message.clientId;
+            }
+            break;
+          case "matched":
+            if (game.gameStatus === GameStatus.NOT_MATCHED) {
+              game.gameStatus = GameStatus.IN_GAME;
+              console.log("Matched with: ", message.clientId);
+              document.getElementById("otherId").value = message.clientId;
+              game.initButtons();
+
+              ws.send(
+                JSON.stringify({
+                  type: "ready",
+                })
+              );
+            }
+            break;
+          case "start_turn":
+            game.gameStatus = GameStatus.IN_GAME;
+            game.allowBet = true;
+            break;
+          case "end_turn":
+            game.allowBet = false;
+            break;
+          case "dismatch":
+            game.gameStatus = GameStatus.NOT_MATCHED;
+            break;
+          case "show_score":
+            game.gameStatus = GameStatus.END_GAME;
+            document.getElementById("replayBtn").style.display = "block";
+            break;
+          // case "replay":
+          // game.gameStatus = GameStatus.IN_GAME;
+          // break;
+        }
+        if (message.data) {
+          game.data = message.data;
+        }
+        showGameStatus();
+        // 清除
+        ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+        if (game.gameStatus >= GameStatus.IN_GAME) {
+          game.draw();
+        }
+        if (game.gameStatus === GameStatus.END_GAME) {
+          game.drawGameResult();
+        }
+      };
+
+      const sendMsg = (data) => {
+        if (ws.readyState === WebSocket.OPEN) {
+          ws.send(JSON.stringify(data));
+        }
+      };
+    </script>
+  </body>
+</html>
